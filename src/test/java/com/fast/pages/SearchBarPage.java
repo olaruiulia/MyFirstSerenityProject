@@ -20,9 +20,11 @@ public class SearchBarPage extends PageObject {
     public void navigateToSearchBar(){
         clickOn(SearchBarField);
     }
+
     public void enterProductCap (){
         typeInto(SearchBarField,"Cap");
     }
+
     public void clickSearchBarButton(){
         clickOn(SearchBarButton);
     }
