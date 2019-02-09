@@ -16,8 +16,9 @@ public class MyAccountPage extends PageObject {
         return welcomeMessageStrong.containsText("Hello olaru_iulia (not olaru_iulia? Log out)");
     }
 
-    public boolean checkRegister(String email){
+    public boolean checkRegister(String username){
         waitFor(welcomeMessageStrong);
-        return welcomeMessageStrong.containsText("Hello" + email);
+        System.out.println(welcomeMessageStrong.getText());
+        return welcomeMessageStrong.containsText("Hello " + username);
     }
 }
