@@ -24,11 +24,11 @@ public class ProductsSteps extends ScenarioSteps {
 
     @Step
     public void selectProduct(){
-        shopPage.selectProduct();
+        Assert.assertTrue(shopPage.selectProduct());
     }
 
     @Step
-    public void clickAddTOCart(){
+    public void clickAddToCart(){
         shopPage.clickAddToCart();
     }
 

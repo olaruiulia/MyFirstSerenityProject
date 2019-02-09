@@ -29,7 +29,7 @@ public class CartTests {
         homePage.open();
         homePage.clickShopButton();
         productsSteps.selectProduct();
-        productsSteps.clickAddTOCart();
+        productsSteps.clickAddToCart();
         cartSteps.navigateToCartButton();
         cartSteps.changeProductQuanity();
         cartSteps.clickUpdateCart();

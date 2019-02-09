@@ -9,8 +9,8 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 
 
-    @RunWith(SerenityRunner.class)
-    public class ProductsTests {
+@RunWith(SerenityRunner.class)
+public class ProductsTests {
 
         @Managed(uniqueSession = true)
         private WebDriver driver;
@@ -26,7 +26,7 @@ import org.openqa.selenium.WebDriver;
             loginSteps.login();
             productsSteps.navigateToShopPage();
             productsSteps.selectProduct();
-            productsSteps.clickAddTOCart();
+            productsSteps.clickAddToCart();
             productsSteps.navigateToCartButton();
             productsSteps.checkProductAddedToCart();
         }

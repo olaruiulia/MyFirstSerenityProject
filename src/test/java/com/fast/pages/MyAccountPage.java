@@ -1,5 +1,4 @@
 package com.fast.pages;
-
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
@@ -12,9 +11,13 @@ public class MyAccountPage extends PageObject {
     @FindBy(css = "div.woocommerce-MyAccount-content p:first-of-type")
     private WebElementFacade welcomeMessageStrong;
 
-
     public boolean checkLoggedIn(){
         waitFor(welcomeMessageStrong);
         return welcomeMessageStrong.containsText("Hello olaru_iulia (not olaru_iulia? Log out)");
+    }
+
+    public boolean checkRegister(String email){
+        waitFor(welcomeMessageStrong);
+        return welcomeMessageStrong.containsText("Hello" + email);
     }
 }
