@@ -21,4 +21,5 @@ public class MyAccountPage extends PageObject {
         System.out.println(welcomeMessageStrong.getText());
         return welcomeMessageStrong.containsText("Hello " + username);
     }
+
 }

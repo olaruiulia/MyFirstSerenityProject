@@ -22,8 +22,24 @@ public class SearchBarTests {
     public void searchByProductName(){
         searchBarSteps.navigateToHomePage();
         searchBarSteps.navigateToSearchBar();
-        searchBarSteps.writePorductName();
+        searchBarSteps.writeProductName();
         searchBarSteps.clickSearchBarButton();
         searchBarSteps.checkProductCap();
+    }
+
+    @Test
+    public void searchTermLength(){
+        searchBarSteps.navigateToHomePage();
+        searchBarSteps.navigateToSearchBar();
+        searchBarSteps.enterSearchTermLength();
+        searchBarSteps.clickSearchBarButton();
+        searchBarSteps.checkMessageSearchBar();
+    }
+
+    @Test
+    public void writeFromList(){
+        searchBarSteps.navigateToHomePage();
+        searchBarSteps.navigateToSearchBar();
+        searchBarSteps.writeFromList();
     }
 }

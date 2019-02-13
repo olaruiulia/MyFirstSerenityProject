@@ -17,6 +17,12 @@ public class ShopPage extends PageObject {
     @FindBy(css = ".single_add_to_cart_button")
     private WebElementFacade addToCart;
 
+    @FindBy(css = ".summary h1")
+    private WebElementFacade searchResultProductCap;
+
+    @FindBy(css = "div.content-inner p")
+    private WebElementFacade noSearchResultMessage;
+
     public void clickShopButton(){
         clickOn(shopButton);
     }
@@ -31,10 +37,41 @@ public class ShopPage extends PageObject {
         return false;
     }
 
+    public boolean selectProductAlbum(){
+        for (WebElementFacade product : listOfProducts){
+            if (product.getText().contains("Album")){
+                clickOn(product);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean findProduct(){
+        for (WebElementFacade product : listOfProducts){
+            if (product.getText().contains("YES")){
+                clickOn(product);
+            }else {
+                product.getText().contains("Album");
+                clickOn(product);
+            }
+        }
+        return false;
+    }
 
     public void clickAddToCart(){
         clickOn(addToCart);
     }
 
+    public boolean checkSearchResultForCap() {
+        waitFor(searchResultProductCap);
+        return searchResultProductCap.containsText("Cap");
+    }
+
+    public boolean checkMessageSearchBar(){
+        waitFor(noSearchResultMessage);
+        System.out.println(noSearchResultMessage.getText());
+        return noSearchResultMessage.containsText("No products were found matching your selection.");
+    }
 
 }

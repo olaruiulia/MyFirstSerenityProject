@@ -3,8 +3,10 @@ import com.fast.pages.CartPage;
 import com.fast.pages.HomePage;
 import com.fast.pages.ShopPage;
 import net.thucydides.core.annotations.Step;
+import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.steps.ScenarioSteps;
 import org.junit.Assert;
+
 
 public class ProductsSteps extends ScenarioSteps {
 
@@ -26,7 +28,15 @@ public class ProductsSteps extends ScenarioSteps {
     public void selectProduct(){
         Assert.assertTrue(shopPage.selectProduct());
     }
+    @Step
+    public void selectProductAlbum(){
+        Assert.assertTrue(shopPage.selectProductAlbum());
+    }
 
+    @Step
+    public void selectWithIf(){
+        shopPage.findProduct();
+    }
     @Step
     public void clickAddToCart(){
         shopPage.clickAddToCart();
@@ -40,5 +50,14 @@ public class ProductsSteps extends ScenarioSteps {
     @Step
     public void checkProductAddedToCart(){
         Assert.assertTrue(cartPage.checkProductInCart());
+    }
+
+    @StepGroup
+    public void addToCartItem(){
+        navigateToHomePage();
+        navigateToShopPage();
+        selectProduct();
+        clickAddToCart();
+        navigateToCartButton();
     }
 }

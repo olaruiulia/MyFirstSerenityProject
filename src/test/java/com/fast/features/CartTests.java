@@ -33,7 +33,18 @@ public class CartTests {
         cartSteps.navigateToCartButton();
         cartSteps.changeProductQuanity();
         cartSteps.clickUpdateCart();
+        cartSteps.checkQuantityPriceUpdate();
     }
+
+    @Test
+    public void selectProductAlbum(){
+        homePage.open();
+        homePage.clickShopButton();
+        productsSteps.selectProductAlbum();
+        productsSteps.clickAddToCart();
+        productsSteps.clickAddToCart();
+    }
+
 
 
 

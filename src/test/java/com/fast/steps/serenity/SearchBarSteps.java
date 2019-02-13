@@ -1,21 +1,26 @@
 package com.fast.steps.serenity;
 
-import com.fast.pages.MyAccountPage;
+import com.fast.pages.HomePage;
 import com.fast.pages.SearchBarPage;
+import com.fast.pages.ShopPage;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.steps.ScenarioSteps;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Assert;
 
 public class SearchBarSteps extends ScenarioSteps {
 
 
-    LoginSteps loginSteps;
-    MyAccountPage myAccountPage;
+    HomePage homePage;
     SearchBarPage searchBarPage;
+    ShopPage shopPage;
+
+
+    private String searchTermLength = RandomStringUtils.randomAlphabetic(25);
 
     @Step
     public void navigateToHomePage (){
-        searchBarPage.open();
+        homePage.open();
     }
 
     @Step
@@ -24,7 +29,7 @@ public class SearchBarSteps extends ScenarioSteps {
     }
 
     @Step
-    public void writePorductName(){
+    public void writeProductName(){
         searchBarPage.enterProductCap();
     }
 
@@ -34,7 +39,22 @@ public class SearchBarSteps extends ScenarioSteps {
     }
 
     @Step
+    public void enterSearchTermLength (){
+        searchBarPage.enterSearchTermLength(searchTermLength);
+    }
+
+    @Step
     public void checkProductCap (){
-        Assert.assertTrue(searchBarPage.checkSearchResultForCap());
+        Assert.assertTrue(shopPage.checkSearchResultForCap());
+    }
+
+    @Step
+    public void checkMessageSearchBar(){
+        Assert.assertTrue(shopPage.checkMessageSearchBar());
+    }
+
+    @Step
+    public void writeFromList(){
+        searchBarPage.setListSearchTerms();
     }
 }

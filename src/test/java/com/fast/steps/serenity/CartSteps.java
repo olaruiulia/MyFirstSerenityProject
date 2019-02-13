@@ -6,7 +6,7 @@ import net.thucydides.core.steps.ScenarioSteps;
 
 public class CartSteps extends ScenarioSteps {
 
-    ShopPage shopPage;
+
     CartPage cartPage;
 
 
@@ -23,5 +23,15 @@ public class CartSteps extends ScenarioSteps {
     @Step
     public void clickUpdateCart(){
         cartPage.clickUpdateCartButton();
+    }
+
+    @Step
+    public void clickCheckoutButton(){
+        cartPage.proceedToCheckoutButton();
+    }
+
+    @Step
+    public void checkQuantityPriceUpdate(){
+        cartPage.checkQuantityPriceUpdate();
     }
 }

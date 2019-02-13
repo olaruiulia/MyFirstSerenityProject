@@ -30,4 +30,12 @@ public class ProductsTests {
             productsSteps.navigateToCartButton();
             productsSteps.checkProductAddedToCart();
         }
+
+        @Test
+        public void addToCartIf(){
+            loginSteps.login();
+            productsSteps.navigateToShopPage();
+            productsSteps.selectWithIf();
+            productsSteps.clickAddToCart();
+        }
     }
