@@ -1,6 +1,7 @@
 package com.fast.features;
 import com.fast.pages.HomePage;
 import com.fast.steps.serenity.CartSteps;
+import com.fast.steps.serenity.LoginSteps;
 import com.fast.steps.serenity.ProductsSteps;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Managed;
@@ -16,6 +17,9 @@ public class CartTests {
     private WebDriver driver;
 
     @Steps
+    LoginSteps loginSteps;
+
+    @Steps
     HomePage homePage;
 
     @Steps
@@ -26,23 +30,28 @@ public class CartTests {
 
     @Test
     public void changeProductQuantity(){
-        homePage.open();
-        homePage.clickShopButton();
+        cartSteps.navigateToHomePage();
+        cartSteps.navigateToShopButton();
         productsSteps.selectProduct();
         productsSteps.clickAddToCart();
         cartSteps.navigateToCartButton();
-        cartSteps.changeProductQuanity();
+        cartSteps.changeProductQuantity();
         cartSteps.clickUpdateCart();
         cartSteps.checkQuantityPriceUpdate();
     }
 
     @Test
-    public void selectProductAlbum(){
-        homePage.open();
-        homePage.clickShopButton();
-        productsSteps.selectProductAlbum();
+    public void deleteFromCart(){
+        cartSteps.navigateToHomePage();
+        loginSteps.login();
+        cartSteps.navigateToShopButton();
+        productsSteps.selectProductFromList();
         productsSteps.clickAddToCart();
-        productsSteps.clickAddToCart();
+        cartSteps.navigateToCartButton();
+        cartSteps.clickOnProductRemoveButton();
+        cartSteps.checkProductRemove();
+
+
     }
 
 

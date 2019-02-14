@@ -16,6 +16,9 @@ public class LoginPage extends PageObject {
     @FindBy(css = ".login p.form-row button")
     private WebElementFacade loginButton;
 
+    @FindBy(css = ".woocommerce-error li " )
+    private WebElementFacade invalidLoginMessage;
+
     public void setEmailField(){
         waitFor(emailField);
         typeInto(emailField,"olaru_iulia@yahoo.com");
@@ -27,6 +30,32 @@ public class LoginPage extends PageObject {
 
     public void clickLoginButton(){
         clickOn(loginButton);
+    }
+
+    public void setEmailFieldAdmin(){
+        waitFor(emailField);
+        typeInto(emailField,"admin");
+    }
+
+    public void setPasswordFieldAdmin(){
+        typeInto(passwordField, "parola11");
+    }
+
+    public boolean checkInvalidLoginMessage(){
+        waitFor(invalidLoginMessage);
+        return invalidLoginMessage.containsText("ERROR");
+    }
+
+    public boolean invalidLoginIfNextStep(){
+        if (invalidLoginMessage.getText().contains("ERROR")){
+            typeInto(passwordField,"NewPassword!1993");
+            return true;
+        }
+        return false;
+    }
+
+    public void setPasswordField2(){
+        typeInto(passwordField, "NewPassword!");
     }
 }
 

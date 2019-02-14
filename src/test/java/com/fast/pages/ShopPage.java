@@ -3,6 +3,8 @@ import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.pages.PageObject;
+
+
 import java.util.List;
 
 @DefaultUrl("http://qa5.fasttrackit.org:8008/?post_type=product")
@@ -29,7 +31,7 @@ public class ShopPage extends PageObject {
 
     public boolean selectProduct(){
         for (WebElementFacade product : listOfProducts){
-            if (product.getText().contains("Belt")){
+            if (product.getText().contains("Polo")){
                 clickOn(product);
                 return true;
             }
@@ -37,9 +39,9 @@ public class ShopPage extends PageObject {
         return false;
     }
 
-    public boolean selectProductAlbum(){
+    public boolean selectProductFromList(){
         for (WebElementFacade product : listOfProducts){
-            if (product.getText().contains("Album")){
+            if (product.getText().contains("Hoodie with Logo")){
                 clickOn(product);
                 return true;
             }
@@ -47,13 +49,14 @@ public class ShopPage extends PageObject {
         return false;
     }
 
-    public boolean findProduct(){
-        for (WebElementFacade product : listOfProducts){
-            if (product.getText().contains("YES")){
-                clickOn(product);
-            }else {
-                product.getText().contains("Album");
-                clickOn(product);
+    public boolean findProductFromListWithIf(){
+        for (WebElementFacade findProduct : listOfProducts){
+            if (findProduct.getText().contains("YES")){
+                clickOn(findProduct);
+                return true;
+            }else if (findProduct.getText().contains("Single")){
+                clickOn(findProduct);
+                return true;
             }
         }
         return false;
@@ -68,7 +71,13 @@ public class ShopPage extends PageObject {
         return searchResultProductCap.containsText("Cap");
     }
 
-    public boolean checkMessageSearchBar(){
+    public boolean checkMessageSearchBarNoProductFound(){
+        waitFor(noSearchResultMessage);
+        System.out.println(noSearchResultMessage.getText());
+        return noSearchResultMessage.containsText("No products were found matching your selection.");
+    }
+
+    public boolean checkMessageSearchBarNoProductList(){
         waitFor(noSearchResultMessage);
         System.out.println(noSearchResultMessage.getText());
         return noSearchResultMessage.containsText("No products were found matching your selection.");

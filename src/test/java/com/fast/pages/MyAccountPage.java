@@ -8,18 +8,24 @@ import net.thucydides.core.pages.PageObject;
 public class MyAccountPage extends PageObject {
 
 
-    @FindBy(css = "div.woocommerce-MyAccount-content p:first-of-type")
+    @FindBy(css = ".woocommerce-MyAccount-content p:first-child")
     private WebElementFacade welcomeMessageStrong;
 
     public boolean checkLoggedIn(){
         waitFor(welcomeMessageStrong);
-        return welcomeMessageStrong.containsText("Hello olaru_iulia (not olaru_iulia? Log out)");
+        return welcomeMessageStrong.containsText("Hello olaru_iulia");
     }
 
     public boolean checkRegister(String username){
         waitFor(welcomeMessageStrong);
         System.out.println(welcomeMessageStrong.getText());
         return welcomeMessageStrong.containsText("Hello " + username);
+    }
+
+    public boolean checkLoggedInAdmin(){
+        waitFor(welcomeMessageStrong);
+        System.out.println(welcomeMessageStrong.getText());
+        return welcomeMessageStrong.containsText("Hello admin");
     }
 
 }

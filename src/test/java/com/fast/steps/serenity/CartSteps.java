@@ -1,22 +1,34 @@
 package com.fast.steps.serenity;
 import com.fast.pages.CartPage;
-import com.fast.pages.ShopPage;
+import com.fast.pages.HomePage;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.steps.ScenarioSteps;
+import org.junit.Assert;
 
 public class CartSteps extends ScenarioSteps {
 
 
     CartPage cartPage;
-
+    HomePage homePage;
 
     @Step
-    public void navigateToCartButton(){
-        cartPage.clickCartButton();
+    public void navigateToHomePage(){
+        getDriver().manage().window().maximize();
+        homePage.open();
     }
 
     @Step
-    public void changeProductQuanity(){
+    public void navigateToShopButton(){
+        homePage.clickShopButton();
+    }
+
+    @Step
+    public void navigateToCartButton(){
+        homePage.clickCartButton();
+    }
+
+    @Step
+    public void changeProductQuantity(){
         cartPage.changeQuantity();
     }
 
@@ -33,5 +45,15 @@ public class CartSteps extends ScenarioSteps {
     @Step
     public void checkQuantityPriceUpdate(){
         cartPage.checkQuantityPriceUpdate();
+    }
+
+    @Step
+    public void clickOnProductRemoveButton(){
+        cartPage.clickOnProductRemoveButton();
+    }
+
+    @Step
+    public void checkProductRemove(){
+        Assert.assertTrue(cartPage.checkProductRemove());
     }
 }

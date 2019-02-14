@@ -17,6 +17,7 @@ public class LoginSteps extends ScenarioSteps {
 
     @Step
     public void navigateToHomepage(){
+        getDriver().manage().window().maximize();
         homePage.open();
     }
 
@@ -46,6 +47,26 @@ public class LoginSteps extends ScenarioSteps {
         Assert.assertTrue(myAccountPage.checkLoggedIn());
     }
 
+    @Step
+    public void setUserAdmin(){
+        loginPage.setEmailFieldAdmin();
+    }
+
+    @Step
+    public void setPasswordAdmin(){
+        loginPage.setPasswordFieldAdmin();
+    }
+
+    @Step
+    public void checkLoggedInAdmin(){
+        Assert.assertTrue(myAccountPage.checkLoggedInAdmin());
+    }
+
+    @Step
+    public void checkInvalidLoginMessage(){
+        Assert.assertTrue(loginPage.checkInvalidLoginMessage());
+    }
+
     @StepGroup
     public void login(){
         navigateToHomepage();
@@ -55,4 +76,25 @@ public class LoginSteps extends ScenarioSteps {
         clickOnLoginButton();
         checkLoggedIn();
     }
+
+    @StepGroup
+    public void loginAsAdmin(){
+        navigateToHomepage();
+        goToLogin();
+        setUserAdmin();
+        setPasswordAdmin();
+        clickOnLoginButton();
+        checkLoggedInAdmin();
+    }
+
+    @Step
+    public void invalidLoginIfStep(){
+        loginPage.invalidLoginIfNextStep();
+    }
+
+    @Step
+    public void setPassword2(){
+        loginPage.setPasswordField2();
+    }
+
 }

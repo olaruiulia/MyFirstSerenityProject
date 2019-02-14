@@ -27,8 +27,7 @@ public class CheckoutTests {
     CheckoutSteps checkoutSteps;
 
     @Test
-    public void checkout() {
-
+    public void checkout(){
         productsSteps.addToCartItem();
         cartSteps.clickCheckoutButton();
         checkoutSteps.setFirstName();
@@ -40,7 +39,7 @@ public class CheckoutTests {
         checkoutSteps.setPhoneNumber();
         checkoutSteps.setEmailAddress();
         checkoutSteps.clickPlaceOrderButton();
-        checkoutSteps.checkOrderRecievedMessage();
+        checkoutSteps.checkOrderReceivedMessage();
     }
 
     @Test
@@ -56,6 +55,9 @@ public class CheckoutTests {
         checkoutSteps.setPhoneWithoutValue();
         checkoutSteps.setWrongEmail();
         checkoutSteps.clickPlaceOrderButton();
-        checkoutSteps.checkWrongThings();
+        checkoutSteps.missingDetails();
+        checkoutSteps.createAccountInBilling();
+        checkoutSteps.setCreateAccountPasswordInCheckout();
+        checkoutSteps.setOrderComments();
     }
 }

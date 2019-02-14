@@ -1,4 +1,5 @@
 package com.fast.pages;
+
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
@@ -31,40 +32,49 @@ public class CartPage extends PageObject {
     @FindBy(css = "a.wc-forward")
     private WebElementFacade checkoutButton;
 
-    @FindBy(css = "a[title*='View your shopping cart']")
-    private WebElementFacade shoppingCartIcon;
+    @FindBy(css = ".product-remove a")
+    private WebElementFacade productRemoveButton;
 
-    public void clickCartButton(){
+    @FindBy(css = "[role='alert']")
+    private WebElementFacade removedMessageInCart;
+
+    public void clickCartButton() {
         clickOn(cartButton);
     }
 
-    public void changeQuantity(){
+    public void changeQuantity() {
         waitFor(quantityfield);
         clickOn(quantityfield);
-        typeInto(quantityfield,"17");
+        typeInto(quantityfield, "17");
     }
 
-    public void clickUpdateCartButton(){
+    public void clickUpdateCartButton() {
         clickOn(updateButton);
     }
 
-    public boolean checkProductInCart(){
+    public boolean checkProductInCart() {
         waitFor(productNameInCart);
-        return productNameInCart.containsText("Belt");
+        return productNameInCart.containsText("Polo");
     }
 
-    public void checkQuantityPriceUpdate(){
+    public boolean checkIfProductInCart() {
+        waitFor(productNameInCart);
+        System.out.println(productNameInCart.getText());
+        return productNameInCart.containsText("Single");
+    }
+
+    public void checkQuantityPriceUpdate() {
 
         String productPrice = productPriceInCart.getText().trim();
-        String priceTrim = productPrice.replace("lei", "").replace(".","");
+        String priceTrim = productPrice.replace("lei", "").replace(".", "");
         int productPriceFin = Integer.valueOf(priceTrim);
 
         String cartTotal = cartTotalUp.getText().trim();
-        String totalPriceTrim = cartTotal.replace("lei", "").replace(".","");
+        String totalPriceTrim = cartTotal.replace("lei", "").replace(".", "");
         int totalPriceFin = Integer.valueOf(totalPriceTrim);
 
         String subtotalCart = cartSubtotal.getText().trim();
-        String subtotalTrim = subtotalCart.replace ("lei", "").replace(".","");
+        String subtotalTrim = subtotalCart.replace("lei", "").replace(".", "");
         int subtotalFin = Integer.valueOf(subtotalTrim);
 
         String quantityBox = quantityfield.getValue();
@@ -72,14 +82,23 @@ public class CartPage extends PageObject {
 
         int multipleQtyProduct = productPriceFin * quantityFieldConvert;
 
-        if ((multipleQtyProduct==totalPriceFin) && (multipleQtyProduct == subtotalFin) && (totalPriceFin == subtotalFin)){
+        if ((multipleQtyProduct == totalPriceFin) && (multipleQtyProduct == subtotalFin) && (totalPriceFin == subtotalFin)) {
             System.out.println("You better work!");
             clickOn(checkoutButton);
         }
     }
-        public void proceedToCheckoutButton(){
+
+    public void proceedToCheckoutButton() {
         clickOn(checkoutButton);
     }
 
+    public void clickOnProductRemoveButton(){
+        clickOn(productRemoveButton);
+    }
+
+    public boolean checkProductRemove(){
+        waitFor(removedMessageInCart);
+        return removedMessageInCart.containsText("removed");
+    }
 
 }

@@ -16,6 +16,7 @@ public class ProductsSteps extends ScenarioSteps {
 
     @Step
     public void navigateToHomePage(){
+        getDriver().manage().window().maximize();
         homePage.open();
     }
 
@@ -29,17 +30,21 @@ public class ProductsSteps extends ScenarioSteps {
         Assert.assertTrue(shopPage.selectProduct());
     }
     @Step
-    public void selectProductAlbum(){
-        Assert.assertTrue(shopPage.selectProductAlbum());
+    public void selectProductFromList(){
+        Assert.assertTrue(shopPage.selectProductFromList());
     }
 
     @Step
-    public void selectWithIf(){
-        shopPage.findProduct();
+    public void selectProductFromIfList(){
+        shopPage.findProductFromListWithIf();
     }
     @Step
     public void clickAddToCart(){
         shopPage.clickAddToCart();
+    }
+    @Step
+    public void clickOnShoppingCartIcon(){
+        homePage.clickOnShoppingCartIcon();
     }
 
     @Step
@@ -50,6 +55,11 @@ public class ProductsSteps extends ScenarioSteps {
     @Step
     public void checkProductAddedToCart(){
         Assert.assertTrue(cartPage.checkProductInCart());
+    }
+
+    @Step
+    public void checkProductInCartFromIfList(){
+        Assert.assertTrue(cartPage.checkIfProductInCart());
     }
 
     @StepGroup

@@ -38,6 +38,9 @@ public class CheckoutPage extends PageObject {
     @FindBy(id = "createaccount")
     private WebElementFacade createAccountCheckBox;
 
+    @FindBy(id = "account_password")
+    private WebElementFacade createAccountPasswordInCheckout;
+
     @FindBy(id = "place_order")
     private WebElementFacade placeOrderButton;
 
@@ -52,6 +55,8 @@ public class CheckoutPage extends PageObject {
 
     @FindBy(css = ".woocommerce-NoticeGroup li:nth-child(2)")
     private WebElementFacade wrongEmail;
+
+
 
     public void clickOnProceedToCheckOutButton(){
         clickOn(proceedToCheckoutButton);
@@ -101,13 +106,19 @@ public class CheckoutPage extends PageObject {
         clickOn(createAccountCheckBox);
     }
 
+    public void setCreateAccountPasswordInCheckout(){
+        typeInto(createAccountPasswordInCheckout,"anythingispossible");
+    }
+
+
     public void clickOnPlaceOrderButton(){
         clickOn(placeOrderButton);
     }
 
-    public void setOrderCommnets(){
+    public void setOrderComments(){
         typeInto(orderCommnets,"i don't have anything to add");
     }
+
 
     public boolean checkOrderPlacement(){
         waitFor(orderRecievedMessage);
@@ -118,7 +129,8 @@ public class CheckoutPage extends PageObject {
     public boolean missingDetails(){
         if ((missingPhone.getText().contains("Billing Phone is a required field.")) && (wrongEmail.getText().contains("Billing Email address is not a valid email address."))){
             System.out.println("You better work!");
-            clickOn(setBillingPhoneNumber();
+            typeInto(billingPhoneNumber,"0788569421");
+            typeInto(billingEmail,"hhh@email.com");
             return true;
         }
         return false;

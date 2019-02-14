@@ -28,12 +28,12 @@ public class SearchBarTests {
     }
 
     @Test
-    public void searchTermLength(){
+    public void searchWithRandomString(){
         searchBarSteps.navigateToHomePage();
         searchBarSteps.navigateToSearchBar();
         searchBarSteps.enterSearchTermLength();
         searchBarSteps.clickSearchBarButton();
-        searchBarSteps.checkMessageSearchBar();
+        searchBarSteps.checkMessageSearchBarNoProductFound();
     }
 
     @Test
@@ -41,5 +41,7 @@ public class SearchBarTests {
         searchBarSteps.navigateToHomePage();
         searchBarSteps.navigateToSearchBar();
         searchBarSteps.writeFromList();
+        searchBarSteps.clickSearchBarButton();
+        searchBarSteps.checkMessageSearchBarNoProductList();
     }
 }

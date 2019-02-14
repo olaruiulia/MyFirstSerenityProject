@@ -20,6 +20,7 @@ public class SearchBarSteps extends ScenarioSteps {
 
     @Step
     public void navigateToHomePage (){
+        getDriver().manage().window().maximize();
         homePage.open();
     }
 
@@ -49,12 +50,17 @@ public class SearchBarSteps extends ScenarioSteps {
     }
 
     @Step
-    public void checkMessageSearchBar(){
-        Assert.assertTrue(shopPage.checkMessageSearchBar());
+    public void checkMessageSearchBarNoProductFound(){
+        Assert.assertTrue(shopPage.checkMessageSearchBarNoProductFound());
     }
 
     @Step
     public void writeFromList(){
         searchBarPage.setListSearchTerms();
+    }
+
+    @Step
+    public void checkMessageSearchBarNoProductList(){
+        Assert.assertTrue(shopPage.checkMessageSearchBarNoProductList());
     }
 }

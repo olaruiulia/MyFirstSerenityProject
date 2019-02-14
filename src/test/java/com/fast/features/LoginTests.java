@@ -18,17 +18,40 @@ public class LoginTests {
     LoginSteps loginSteps;
 
     @Test
-    public void validLoginTest(){
-       loginSteps.navigateToHomepage();
-       loginSteps.goToLogin();
-       loginSteps.setUser();
-       loginSteps.setPassword();
-       loginSteps.clickOnLoginButton();
-       loginSteps.checkLoggedIn();
+    public void validLoginTest() {
+        loginSteps.navigateToHomepage();
+        loginSteps.goToLogin();
+        loginSteps.setUser();
+        loginSteps.setPassword();
+        loginSteps.clickOnLoginButton();
+        loginSteps.checkLoggedIn();
     }
 
     @Test
-    public void validLogin(){
+    public void loginAsAdmin() {
+        loginSteps.navigateToHomepage();
+        loginSteps.goToLogin();
+        loginSteps.setUserAdmin();
+        loginSteps.setPasswordAdmin();
+        loginSteps.clickOnLoginButton();
+        loginSteps.checkLoggedInAdmin();
+    }
+
+    @Test
+    public void invalidLogin() {
+        loginSteps.navigateToHomepage();
+        loginSteps.goToLogin();
+        loginSteps.setUser();
+        loginSteps.setPassword2();
+        loginSteps.clickOnLoginButton();
+        loginSteps.checkInvalidLoginMessage();
+        loginSteps.invalidLoginIfStep();
+        loginSteps.clickOnLoginButton();
+
+    }
+
+    @Test
+    public void validLogin() {
         loginSteps.login();
     }
 

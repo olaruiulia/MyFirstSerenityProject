@@ -18,6 +18,9 @@ public class HomePage extends PageObject {
     @FindBy (id = "menu-item-72")
     private WebElementFacade cartButton;
 
+    @FindBy(css = "a[title*='View your shopping cart']")
+    private WebElementFacade shoppingCartIcon;
+
 
     public void clickMyAccountButton(){
         withTimeoutOf(15, TimeUnit.SECONDS).waitFor(myAccountButton);
@@ -30,6 +33,10 @@ public class HomePage extends PageObject {
 
     public void clickCartButton(){
         clickOn(cartButton);
+    }
+
+    public void clickOnShoppingCartIcon(){
+        clickOn(shoppingCartIcon);
     }
 
 

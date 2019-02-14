@@ -20,8 +20,6 @@ public class SearchBarPage extends PageObject {
     private WebElementFacade searchBarButton;
 
 
-    public String searchTermLength = RandomStringUtils.randomAlphabetic(25);
-
     public void navigateToSearchBar() {
         clickOn(searchBarField);
     }

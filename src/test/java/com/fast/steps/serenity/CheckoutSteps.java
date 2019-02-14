@@ -3,7 +3,6 @@ package com.fast.steps.serenity;
 import com.fast.pages.CheckoutPage;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
-import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.steps.ScenarioSteps;
 import org.junit.Assert;
 
@@ -57,12 +56,22 @@ public class CheckoutSteps extends ScenarioSteps {
     }
 
     @Step
+    public void setCreateAccountPasswordInCheckout(){
+        checkoutPage.setCreateAccountPasswordInCheckout();
+    }
+
+    @Step
+    public void setOrderComments(){
+        checkoutPage.setOrderComments();
+    }
+
+    @Step
     public void clickPlaceOrderButton(){
         checkoutPage.clickOnPlaceOrderButton();
     }
 
     @Step
-    public void checkOrderRecievedMessage(){
+    public void checkOrderReceivedMessage(){
         Assert.assertTrue(checkoutPage.checkOrderPlacement());
     }
 
@@ -77,7 +86,7 @@ public class CheckoutSteps extends ScenarioSteps {
     }
 
     @Step
-    public void checkWrongThings(){
+    public void missingDetails(){
         checkoutPage.missingDetails();
     }
 
@@ -92,7 +101,7 @@ public class CheckoutSteps extends ScenarioSteps {
         setPhoneNumber();
         setEmailAddress();
         clickPlaceOrderButton();
-        checkOrderRecievedMessage();
+        checkOrderReceivedMessage();
 
     }
 }
