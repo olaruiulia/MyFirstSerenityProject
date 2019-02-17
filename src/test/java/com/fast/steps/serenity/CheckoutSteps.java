@@ -8,46 +8,46 @@ import org.junit.Assert;
 
 public class CheckoutSteps extends ScenarioSteps {
 
-    CheckoutPage checkoutPage;
+    private CheckoutPage checkoutPage;
 
     @Step
     public void setFirstName(){
-        checkoutPage.setBillingFirstName();
+        checkoutPage.setBillingFirstName("Lilla");
     }
 
     @Step
     public void setLastName(){
-        checkoutPage.setBillingLastName();
+        checkoutPage.setBillingLastName("Okoska");
     }
 
     @Step
     public void chooseCountry(){
-        checkoutPage.clickOnCountryDropDown();
+        checkoutPage.clickOnCountryDropDown("Romania");
     }
 
     @Step
     public void setStreetAddress(){
-        checkoutPage.setStreetAddress();
+        checkoutPage.setStreetAddress("Sunshine Boulevard");
     }
 
     @Step
     public void setCityName(){
-        checkoutPage.setCityName();
+        checkoutPage.setCityName("Cluj");
     }
 
     @Step
     public void setPostcode(){
-        checkoutPage.setBillingPostCode();
+        checkoutPage.setBillingPostCode("225478");
     }
 
     @Step
     public void setPhoneNumber(){
-        checkoutPage.setBillingPhoneNumber();
+        checkoutPage.setBillingPhoneNumber("4875874569554");
     }
 
     @Step
     public void setEmailAddress(){
-        checkoutPage.setBillingEmail();
+        checkoutPage.setBillingEmail("nothingserious@email.com");
     }
 
     @Step
@@ -57,12 +57,12 @@ public class CheckoutSteps extends ScenarioSteps {
 
     @Step
     public void setCreateAccountPasswordInCheckout(){
-        checkoutPage.setCreateAccountPasswordInCheckout();
+        checkoutPage.setCreateAccountPasswordInCheckout("anythingispossible");
     }
 
     @Step
     public void setOrderComments(){
-        checkoutPage.setOrderComments();
+        checkoutPage.setOrderComments("I don't have anything to add");
     }
 
     @Step
@@ -72,22 +72,22 @@ public class CheckoutSteps extends ScenarioSteps {
 
     @Step
     public void checkOrderReceivedMessage(){
-        Assert.assertTrue(checkoutPage.checkOrderPlacement());
+        Assert.assertTrue(checkoutPage.checkOrderPlacement("Thank you. Your order has been received."));
     }
 
     @Step
     public void setPhoneWithoutValue(){
-        checkoutPage.setBillingPhoneNumberWithoutValue();
+        checkoutPage.setBillingPhoneNumberWithoutValue("");
     }
 
     @Step
     public void setWrongEmail(){
-        checkoutPage.setBillingEmailInvalid();
+        checkoutPage.setBillingEmailInvalid("hhh@.com");
     }
 
     @Step
     public void missingDetails(){
-        checkoutPage.missingDetails();
+        checkoutPage.missingDetails("Billing Phone is a required field.", "Billing Email address is not a valid email address.","0788569421","new.email@email.com" );
     }
 
     @StepGroup

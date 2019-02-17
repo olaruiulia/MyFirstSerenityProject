@@ -3,98 +3,78 @@ package com.fast.steps.serenity;
 import com.fast.pages.HomePage;
 import com.fast.pages.LoginPage;
 import com.fast.pages.MyAccountPage;
+import com.fast.utils.Constants;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
-import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.steps.ScenarioSteps;
 import org.junit.Assert;
 
 public class LoginSteps extends ScenarioSteps {
 
-    HomePage homePage;
-    LoginPage loginPage;
-    MyAccountPage myAccountPage;
+    private HomePage homePage;
+    private LoginPage loginPage;
+    private MyAccountPage myAccountPage;
 
     @Step
-    public void navigateToHomepage(){
+    public void navigateToHomepage() {
         getDriver().manage().window().maximize();
         homePage.open();
     }
 
     @Step
-    public void goToLogin(){
+    public void clickMyAccountButton() {
         homePage.clickMyAccountButton();
-
     }
 
     @Step
-    public void setUser(){
-        loginPage.setEmailField();
+    public void setUserEmail(String email) {
+        loginPage.setEmailField(email);
     }
 
     @Step
-    public void setPassword(){
-        loginPage.setPasswordField();
+    public void setPassword(String password) {
+        loginPage.setPasswordField(password);
     }
 
     @Step
-    public void clickOnLoginButton(){
+    public void clickOnLoginButton() {
         loginPage.clickLoginButton();
     }
 
     @Step
-    public void checkLoggedIn(){
-        Assert.assertTrue(myAccountPage.checkLoggedIn());
+    public void checkLoggedIn(String loginMessage) {
+        Assert.assertTrue(myAccountPage.checkLoggedIn(loginMessage));
     }
 
     @Step
-    public void setUserAdmin(){
-        loginPage.setEmailFieldAdmin();
+    public void invalidLoginIfStep() {
+        loginPage.invalidLoginIfNextStep("ERROR", Constants.USER_PASSWORD);
     }
 
     @Step
-    public void setPasswordAdmin(){
-        loginPage.setPasswordFieldAdmin();
-    }
-
-    @Step
-    public void checkLoggedInAdmin(){
-        Assert.assertTrue(myAccountPage.checkLoggedInAdmin());
-    }
-
-    @Step
-    public void checkInvalidLoginMessage(){
-        Assert.assertTrue(loginPage.checkInvalidLoginMessage());
+    public void clickLogoutButton() {
+        myAccountPage.clickCostumerLogout();
     }
 
     @StepGroup
-    public void login(){
+    public void login(String loginMessage) {
         navigateToHomepage();
-        goToLogin();
-        setUser();
-        setPassword();
+        clickMyAccountButton();
+        setUserEmail(Constants.USER_EMAIL);
+        setPassword(Constants.USER_PASSWORD);
         clickOnLoginButton();
-        checkLoggedIn();
+        checkLoggedIn(loginMessage);
     }
 
     @StepGroup
-    public void loginAsAdmin(){
+    public void loginAsAdmin(String loginMessage) {
         navigateToHomepage();
-        goToLogin();
-        setUserAdmin();
-        setPasswordAdmin();
+        clickMyAccountButton();
+        setUserEmail(Constants.ADMIN_USERNAME);
+        setPassword(Constants.ADMIN_PASSWORD);
         clickOnLoginButton();
-        checkLoggedInAdmin();
+        checkLoggedIn(loginMessage);
     }
 
-    @Step
-    public void invalidLoginIfStep(){
-        loginPage.invalidLoginIfNextStep();
-    }
-
-    @Step
-    public void setPassword2(){
-        loginPage.setPasswordField2();
-    }
 
 }

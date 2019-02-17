@@ -4,11 +4,9 @@ import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.pages.PageObject;
-import org.apache.commons.lang3.RandomStringUtils;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
+
 
 @DefaultUrl("http://qa5.fasttrackit.org:8008/")
 public class SearchBarPage extends PageObject {
@@ -24,31 +22,29 @@ public class SearchBarPage extends PageObject {
         clickOn(searchBarField);
     }
 
-    public void enterProductCap() {
-        typeInto(searchBarField, "Cap");
+    public void enterProduct(String product) {
+        typeInto(searchBarField, product);
+    }
+
+    public void enterSearchTermLength(String searchTermLength) {
+        typeInto(searchBarField, searchTermLength);
     }
 
     public void clickSearchBarButton() {
         clickOn(searchBarButton);
     }
 
-    public void enterSearchTermLength(String searchTermLength){
-        typeInto(searchBarField,searchTermLength);
-    }
+    private ArrayList<String> listSearchTerms = new ArrayList<>();
 
-     private ArrayList<String> listSearchTerms = new ArrayList<>();
-
-    public void setListSearchTerms (){
-        listSearchTerms.add("Hoodie with Zipper");
-        listSearchTerms.add("blue");
-        listSearchTerms.add("album");
-        listSearchTerms.add("yellow");
-        listSearchTerms.add("car");
-        listSearchTerms.add("25789");
-        listSearchTerms.add("ELEMENT");
-        listSearchTerms.add("%$&!** !");
-        listSearchTerms.add("belt");
-        listSearchTerms.add("polo");
+    public void setListSearchTerms(String prOne, String prTwo, String prThree, String prFour, String prFive, String prSix, String prSeven, String prEight) {
+        listSearchTerms.add(prOne);
+        listSearchTerms.add(prTwo);
+        listSearchTerms.add(prThree);
+        listSearchTerms.add(prFour);
+        listSearchTerms.add(prFive);
+        listSearchTerms.add(prSix);
+        listSearchTerms.add(prSeven);
+        listSearchTerms.add(prEight);
 
         String listA = listSearchTerms.get(5);
         typeInto(searchBarField, listA);

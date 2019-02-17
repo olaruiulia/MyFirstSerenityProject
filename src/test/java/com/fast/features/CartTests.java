@@ -1,4 +1,5 @@
 package com.fast.features;
+
 import com.fast.pages.HomePage;
 import com.fast.steps.serenity.CartSteps;
 import com.fast.steps.serenity.LoginSteps;
@@ -17,45 +18,70 @@ public class CartTests {
     private WebDriver driver;
 
     @Steps
-    LoginSteps loginSteps;
+    private LoginSteps loginSteps;
 
     @Steps
-    HomePage homePage;
+    private HomePage homePage;
 
     @Steps
-    ProductsSteps productsSteps;
+    private ProductsSteps productsSteps;
 
     @Steps
-    CartSteps cartSteps;
+    private CartSteps cartSteps;
 
     @Test
-    public void changeProductQuantity(){
+    public void changeProductQuantity() {
         cartSteps.navigateToHomePage();
         cartSteps.navigateToShopButton();
-        productsSteps.selectProduct();
+        productsSteps.selectProductFromList("Polo");
         productsSteps.clickAddToCart();
         cartSteps.navigateToCartButton();
-        cartSteps.changeProductQuantity();
+        cartSteps.changeProductQuantity("17");
         cartSteps.clickUpdateCart();
         cartSteps.checkQuantityPriceUpdate();
     }
 
     @Test
-    public void deleteFromCart(){
+    public void deleteFromCart() {
         cartSteps.navigateToHomePage();
-        loginSteps.login();
+        loginSteps.login("Hello olaru_iulia");
         cartSteps.navigateToShopButton();
-        productsSteps.selectProductFromList();
+        productsSteps.selectProductFromList("Hoodie with Logo");
         productsSteps.clickAddToCart();
         cartSteps.navigateToCartButton();
         cartSteps.clickOnProductRemoveButton();
-        cartSteps.checkProductRemove();
-
-
+        cartSteps.checkProductRemoveMessage();
     }
 
+    @Test
+    public void couponTest() {
+        cartSteps.navigateToHomePage();
+        loginSteps.login("Hello olaru_iulia");
+        cartSteps.navigateToShopButton();
+        productsSteps.selectProductFromList("Beanie");
+        productsSteps.clickAddToCart();
+        cartSteps.navigateToCartButton();
+        cartSteps.setCouponCodeField();
+        cartSteps.clickOnApplyCouponButton();
+        cartSteps.checkCouponInvalidMessage();
+        cartSteps.clickOnProductRemoveButton();
+    }
 
-
+    @Test
+    public void checkCartAfterClosingAndReopening() {
+        cartSteps.navigateToHomePage();
+        loginSteps.login("Hello olaru_iulia");
+        cartSteps.navigateToShopButton();
+        productsSteps.selectProductFromList("Belt");
+        productsSteps.clickAddToCart();
+        cartSteps.navigateToCartButton();
+        driver.quit();
+        cartSteps.navigateToHomePage();
+        loginSteps.login("Hello olaru_iulia");
+        cartSteps.navigateToCartButton();
+        cartSteps.clickOnProductRemoveButton();
+        cartSteps.checkProductRemoveMessage();
+    }
 
 
 }

@@ -20,7 +20,7 @@ public class ShopPage extends PageObject {
     private WebElementFacade addToCart;
 
     @FindBy(css = ".summary h1")
-    private WebElementFacade searchResultProductCap;
+    private WebElementFacade searchResultProduct;
 
     @FindBy(css = "div.content-inner p")
     private WebElementFacade noSearchResultMessage;
@@ -29,9 +29,9 @@ public class ShopPage extends PageObject {
         clickOn(shopButton);
     }
 
-    public boolean selectProduct(){
+    public boolean selectProductFromList(String productName){
         for (WebElementFacade product : listOfProducts){
-            if (product.getText().contains("Polo")){
+            if (product.getText().contains(productName)){
                 clickOn(product);
                 return true;
             }
@@ -39,22 +39,12 @@ public class ShopPage extends PageObject {
         return false;
     }
 
-    public boolean selectProductFromList(){
-        for (WebElementFacade product : listOfProducts){
-            if (product.getText().contains("Hoodie with Logo")){
-                clickOn(product);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean findProductFromListWithIf(){
+    public boolean findProductFromListWithIf(String nonExistent, String existingProduct){
         for (WebElementFacade findProduct : listOfProducts){
-            if (findProduct.getText().contains("YES")){
+            if (findProduct.getText().contains(nonExistent)){
                 clickOn(findProduct);
                 return true;
-            }else if (findProduct.getText().contains("Single")){
+            }else if (findProduct.getText().contains(existingProduct)){
                 clickOn(findProduct);
                 return true;
             }
@@ -66,21 +56,17 @@ public class ShopPage extends PageObject {
         clickOn(addToCart);
     }
 
-    public boolean checkSearchResultForCap() {
-        waitFor(searchResultProductCap);
-        return searchResultProductCap.containsText("Cap");
+    public boolean checkSearchResultForProduct(String productName) {
+        waitFor(searchResultProduct);
+        return searchResultProduct.containsText(productName);
     }
 
-    public boolean checkMessageSearchBarNoProductFound(){
+    public boolean checkMessageSearchBarNoProductFound(String errorMessage){
         waitFor(noSearchResultMessage);
         System.out.println(noSearchResultMessage.getText());
-        return noSearchResultMessage.containsText("No products were found matching your selection.");
+        return noSearchResultMessage.containsText(errorMessage);
     }
 
-    public boolean checkMessageSearchBarNoProductList(){
-        waitFor(noSearchResultMessage);
-        System.out.println(noSearchResultMessage.getText());
-        return noSearchResultMessage.containsText("No products were found matching your selection.");
-    }
+
 
 }

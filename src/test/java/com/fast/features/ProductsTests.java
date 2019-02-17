@@ -18,38 +18,60 @@ public class ProductsTests {
     private WebDriver driver;
 
     @Steps
-    LoginSteps loginSteps;
+    private LoginSteps loginSteps;
 
     @Steps
-    ProductsSteps productsSteps;
+    private ProductsSteps productsSteps;
 
     @Steps
-    CartSteps cartSteps;
+    private CartSteps cartSteps;
 
     @Test
 
     public void addToCart() {
-        loginSteps.login();
+        loginSteps.login("Hello olaru_iulia");
         productsSteps.navigateToShopPage();
-        productsSteps.selectProduct();
+        productsSteps.selectProductFromList("Polo");
+        productsSteps.checkSearchResultForProduct("Polo");
         productsSteps.clickAddToCart();
         productsSteps.navigateToCartButton();
-        productsSteps.checkProductAddedToCart();
+        productsSteps.checkProductAddedToCart("Polo");
         cartSteps.clickOnProductRemoveButton();
-        cartSteps.checkProductRemove();
+        cartSteps.checkProductRemoveMessage();
 
     }
 
     @Test
-    public void addToCartWithIf() {
-        loginSteps.login();
+    public void addToCartWithIfSelection() {
+        loginSteps.login("Hello olaru_iulia");
         productsSteps.navigateToShopPage();
-        productsSteps.selectProductFromIfList();
+        productsSteps.findProductFromListWithIf("YES", "Single");
+        productsSteps.checkSearchResultForProduct("Single");
         productsSteps.clickAddToCart();
         productsSteps.clickOnShoppingCartIcon();
-        productsSteps.checkProductInCartFromIfList();
+        productsSteps.checkProductAddedToCart("Single");
         cartSteps.clickOnProductRemoveButton();
-        cartSteps.checkProductRemove();
+        cartSteps.checkProductRemoveMessage();
+
+
+    }
+
+    @Test
+    public void addToCartMultipleProducts(){
+        productsSteps.navigateToHomePage();
+        productsSteps.navigateToShopPage();
+        productsSteps.selectProductFromList("Hoodie with Zipper");
+        productsSteps.checkSearchResultForProduct("Hoodie with Zipper");
+        productsSteps.clickAddToCart();
+        productsSteps.navigateToShopPage();
+        productsSteps.selectProductFromList("Polo");
+        productsSteps.checkSearchResultForProduct("Polo");
+        productsSteps.clickAddToCart();
+        productsSteps.navigateToShopPage();
+        productsSteps.selectProductFromList("Long Sleeve Tee");
+        productsSteps.checkSearchResultForProduct("Long Sleeve Tee");
+        productsSteps.clickAddToCart();
+        productsSteps.navigateToCartButton();
 
     }
 }

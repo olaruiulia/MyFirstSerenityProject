@@ -1,7 +1,6 @@
 package com.fast.features;
 
-import com.fast.steps.serenity.AdminSteps;
-import com.fast.steps.serenity.LoginSteps;
+import com.fast.steps.serenity.*;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Managed;
 import net.thucydides.core.annotations.Steps;
@@ -16,19 +15,27 @@ public class AdminTests {
     private WebDriver driver;
 
     @Steps
-    LoginSteps loginSteps;
+    private LoginSteps loginSteps;
 
     @Steps
-    AdminSteps adminSteps;
+    private AdminSteps adminSteps;
+
+    @Steps
+    private CartSteps cartSteps;
+
+    @Steps
+    private ProductsSteps productsSteps;
+
+    @Steps
+    private CheckoutSteps checkoutSteps;
 
     @Test
-    public void createProduct(){
-        loginSteps.loginAsAdmin();
+    public void createProduct() {
+        loginSteps.loginAsAdmin("Hello admin");
         adminSteps.selectDashboard();
         adminSteps.clickOnDashboard();
-        adminSteps.selectMainMenuCategory();
+        adminSteps.selectMainMenuCategory("Products");
         adminSteps.clickOnAddNewProductButton();
-        adminSteps.setNewTitleField();
         adminSteps.setRegularPrice();
         adminSteps.setSalePrice();
         adminSteps.clickOnInventoryButton();
@@ -47,4 +54,31 @@ public class AdminTests {
         adminSteps.clickOnPublishButton();
         adminSteps.checkProductPublishMessage();
     }
+
+    @Test
+    public void checkStockQuantity() {
+        loginSteps.loginAsAdmin("Hello admin");
+        adminSteps.selectDashboard();
+        adminSteps.clickOnDashboard();
+        adminSteps.selectMainMenuCategory("Products");
+        adminSteps.clickOnAllProductsButton();
+        adminSteps.adminBarMyAccountHoverOver();
+        adminSteps.clickOnAdminLogOutButton();
+        adminSteps.clickBackToPage();
+        loginSteps.login("Hello olaru_iulia");
+        productsSteps.navigateToShopPage();
+        productsSteps.selectProductFromList("Backpack3");
+        productsSteps.navigateToCartButton();
+        cartSteps.clickCheckoutButton();
+        checkoutSteps.setCheckoutPage();
+        loginSteps.clickMyAccountButton();
+        loginSteps.clickLogoutButton();
+        loginSteps.loginAsAdmin("Hello admin");
+        adminSteps.selectDashboard();
+        adminSteps.clickOnDashboard();
+        adminSteps.selectMainMenuCategory("Products");
+        adminSteps.clickOnAllProductsButton();
+    }
+
+
 }

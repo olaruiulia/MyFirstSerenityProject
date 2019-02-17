@@ -19,43 +19,29 @@ public class LoginPage extends PageObject {
     @FindBy(css = ".woocommerce-error li " )
     private WebElementFacade invalidLoginMessage;
 
-    public void setEmailField(){
+    public void setEmailField(String email){
         waitFor(emailField);
-        typeInto(emailField,"olaru_iulia@yahoo.com");
+        typeInto(emailField,email);
     }
 
-    public void setPasswordField(){
-        typeInto(passwordField, "NewPassword!1993");
+    public void setPasswordField(String password){
+        typeInto(passwordField, password);
     }
 
     public void clickLoginButton(){
         clickOn(loginButton);
     }
 
-    public void setEmailFieldAdmin(){
-        waitFor(emailField);
-        typeInto(emailField,"admin");
-    }
-
-    public void setPasswordFieldAdmin(){
-        typeInto(passwordField, "parola11");
-    }
-
-    public boolean checkInvalidLoginMessage(){
+    public boolean invalidLoginIfNextStep(String errorMessage, String password){
         waitFor(invalidLoginMessage);
-        return invalidLoginMessage.containsText("ERROR");
-    }
-
-    public boolean invalidLoginIfNextStep(){
-        if (invalidLoginMessage.getText().contains("ERROR")){
-            typeInto(passwordField,"NewPassword!1993");
+        System.out.println(invalidLoginMessage.getText());
+        if (invalidLoginMessage.getText().contains(errorMessage)){
+            typeInto(passwordField,password);
             return true;
         }
         return false;
     }
 
-    public void setPasswordField2(){
-        typeInto(passwordField, "NewPassword!");
-    }
+
 }
 

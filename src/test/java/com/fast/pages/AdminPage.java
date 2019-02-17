@@ -81,6 +81,36 @@ public class AdminPage extends PageObject {
     @FindBy(css = ".updated p")
     private WebElementFacade checkProductPublishMessage;
 
+    @FindBy(css = "#menu-posts-product .wp-has-submenu")
+    private WebElementFacade allProductsButton;
+
+    @FindBy(css = ".wp-first-item a[href*=users]")
+    private WebElementFacade allUsersButton;
+
+    @FindBy(id = "wp-admin-bar-my-account")
+    private WebElementFacade adminBarMyAccount;
+
+    @FindBy(css = ".ab-item[href*='logout']")
+    private WebElementFacade adminLogOutButton;
+
+    @FindBy(css = "#backtoblog a")
+    private WebElementFacade backToHomePage;
+
+    @FindBy(css = ".username strong a")
+    List<WebElementFacade> newUsernames;
+
+    @FindBy(id = "user-search-input")
+    private WebElementFacade userSearchField;
+
+    @FindBy(id = "search-submit")
+    private WebElementFacade searchUsersButton;
+
+    @FindBy(css = ".wp-first-item a[href*='shop_order']")
+    private WebElementFacade ordersButton;
+
+    @FindBy(id = ".order-view strong")
+    List<WebElementFacade> ordersList;
+
 
     public void selectDashboardHoverOver() {
         Actions action = new Actions(getDriver());
@@ -92,10 +122,10 @@ public class AdminPage extends PageObject {
         clickOn(dashBoardButton);
     }
 
-    public boolean selectMainMenuCategory() {
+    public boolean selectMainMenuCategory(String categories) {
         Actions action = new Actions(getDriver());
         for (WebElementFacade category : mainMenuCategories) {
-            if (category.getText().contains("Products")) {
+            if (category.getText().contains(categories)) {
                 WebElementFacade e = category;
                 action.moveToElement(e).perform();
                 return true;
@@ -108,36 +138,40 @@ public class AdminPage extends PageObject {
         clickOn(addNewProductButton);
     }
 
-    public void setNewTitleField() {
-        typeInto(newTitleField, "Backpack3");
+    public void clickOnAllUsersButton() {
+        clickOn(allUsersButton);
     }
 
-    public void setDescriptionField() {
-        typeInto(shortDescriptionField, "If you'r not too cool for school, buy a backpack!");
+    public void setNewTitleField(String newProductName) {
+        typeInto(newTitleField, newProductName);
     }
 
-    public void setRegularPrice() {
-        typeInto(regularPrice, "250");
+    public void setDescriptionField(String description) {
+        typeInto(shortDescriptionField, description);
     }
 
-    public void setSalePrice() {
-        typeInto(salePrice, "249.90");
+    public void setRegularPrice(String price) {
+        typeInto(regularPrice, price);
+    }
+
+    public void setSalePrice(String sale) {
+        typeInto(salePrice, sale);
     }
 
     public void clickOnInventoryButton() {
         clickOn(inventoryButton);
     }
 
-    public void setSkuNumber() {
-        typeInto(skuNumber, "DK48567");
+    public void setSkuNumber(String skuNo) {
+        typeInto(skuNumber, skuNo);
     }
 
     public void clickManageStockCheckbox() {
         clickOn(manageStockCheckBox);
     }
 
-    public void setStockQuantityField() {
-        typeInto(stockQuantatyField, "10");
+    public void setStockQuantityField(String stockQuantity) {
+        typeInto(stockQuantatyField, stockQuantity);
     }
 
     public void clickAttributesButton() {
@@ -154,9 +188,6 @@ public class AdminPage extends PageObject {
         clickOn(selectColor);
     }
 
-    public void clickOnSelectSize() {
-        clickOn(selectSize);
-    }
 
     public void clickOnAddAttributesButton() {
         clickOn(addAttributesButton);
@@ -174,17 +205,71 @@ public class AdminPage extends PageObject {
         clickOn(accessoriesCheckBox);
     }
 
+    public void clickOnNewTitleField() {
+        waitFor(newTitleField);
+        clickOn(newTitleField);
+    }
+
     public void clickOnPublishButton() {
-        waitABit(5000);
-        //hiddenElement.waitUntilClickable();
+        waitFor(publishButton);
         clickOn(publishButton);
 
     }
 
-    public boolean checkProductPublishMessage() {
-        waitABit(7000);
+    public boolean checkProductPublishMessage(String publishMessage) {
+        waitFor(checkProductPublishMessage);
         System.out.println(checkProductPublishMessage);
-        return checkProductPublishMessage.containsText("Product published.");
+        return checkProductPublishMessage.containsText(publishMessage);
+    }
+
+    public void clickOnAllProductsButton() {
+        clickOn(allProductsButton);
+    }
+
+    public void adminBarMyAccountHoverOver() {
+        Actions action = new Actions(getDriver());
+        WebElementFacade e = adminBarMyAccount;
+        action.moveToElement(e).perform();
+    }
+
+    public boolean usernameList(String username) {
+        for (WebElementFacade userNames : newUsernames) {
+            if (userNames.getText().contains(username)) {
+                System.out.println("The username exits!");
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void clickOnAdminLogOutButton() {
+        clickOn(adminLogOutButton);
+    }
+
+    public void clickBackToPage() {
+        clickOn(backToHomePage);
+    }
+
+    public void setUserSearchField(String username) {
+        typeInto(userSearchField, username);
+    }
+
+    public void clickOnSearchUsersButton() {
+        clickOn(searchUsersButton);
+    }
+
+    public void clickOnOrdersButton() {
+        clickOn(ordersButton);
+    }
+
+    public boolean orderUsernameList(String orderUsername) {
+        for (WebElementFacade orders : ordersList) {
+            if (orders.getText().contains(orderUsername)) {
+                System.out.println("The username exits!");
+                return true;
+            }
+        }
+        return false;
     }
 
 

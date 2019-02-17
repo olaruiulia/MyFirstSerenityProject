@@ -4,6 +4,9 @@ import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.pages.PageObject;
+import org.yecht.Data;
+
+import java.util.List;
 
 @DefaultUrl("http://qa5.fasttrackit.org:8008/?page_id=5")
 public class CartPage extends PageObject {
@@ -38,29 +41,33 @@ public class CartPage extends PageObject {
     @FindBy(css = "[role='alert']")
     private WebElementFacade removedMessageInCart;
 
+    @FindBy(id = "coupon_code")
+    private WebElementFacade couponCodeField;
+
+    @FindBy(css = ".coupon .button")
+    private WebElementFacade applyCouponButton;
+
+    @FindBy(css = ".woocommerce-error li")
+    private WebElementFacade couponInvalidMessage;
+
     public void clickCartButton() {
         clickOn(cartButton);
     }
 
-    public void changeQuantity() {
+    public void changeQuantity(String quantity) {
         waitFor(quantityfield);
         clickOn(quantityfield);
-        typeInto(quantityfield, "17");
+        typeInto(quantityfield, quantity);
     }
 
     public void clickUpdateCartButton() {
         clickOn(updateButton);
     }
 
-    public boolean checkProductInCart() {
+    public boolean checkProductInCart(String productName) {
         waitFor(productNameInCart);
-        return productNameInCart.containsText("Polo");
-    }
-
-    public boolean checkIfProductInCart() {
-        waitFor(productNameInCart);
-        System.out.println(productNameInCart.getText());
-        return productNameInCart.containsText("Single");
+        System.out.println("the product name is: "+productNameInCart.getText());
+        return productNameInCart.containsText(productName);
     }
 
     public void checkQuantityPriceUpdate() {
@@ -96,9 +103,23 @@ public class CartPage extends PageObject {
         clickOn(productRemoveButton);
     }
 
-    public boolean checkProductRemove(){
+    public boolean checkProductRemoveMessage(String removedMessage){
         waitFor(removedMessageInCart);
-        return removedMessageInCart.containsText("removed");
+        return removedMessageInCart.containsText(removedMessage);
+    }
+
+    public void setCouponCodeField(String coupon){
+        typeInto(couponCodeField,coupon);
+    }
+
+    public void clickOnApplyCouponButton(){
+        clickOn(applyCouponButton);
+    }
+
+    public boolean checkCouponInvalidMessage(String invalidCouponMessage){
+        waitFor(couponInvalidMessage);
+        System.out.println(couponInvalidMessage.getText());
+        return couponInvalidMessage.containsText(invalidCouponMessage);
     }
 
 }

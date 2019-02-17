@@ -1,6 +1,5 @@
 package com.fast.features;
 
-
 import com.fast.steps.serenity.SearchBarSteps;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Managed;
@@ -16,15 +15,15 @@ public class SearchBarTests {
     private WebDriver driver;
 
     @Steps
-    SearchBarSteps searchBarSteps;
+    private SearchBarSteps searchBarSteps;
 
     @Test
     public void searchByProductName(){
         searchBarSteps.navigateToHomePage();
         searchBarSteps.navigateToSearchBar();
-        searchBarSteps.writeProductName();
+        searchBarSteps.writeProductName("Cap");
         searchBarSteps.clickSearchBarButton();
-        searchBarSteps.checkProductCap();
+        searchBarSteps.checkSearchResultForProduct("Cap");
     }
 
     @Test
@@ -42,6 +41,15 @@ public class SearchBarTests {
         searchBarSteps.navigateToSearchBar();
         searchBarSteps.writeFromList();
         searchBarSteps.clickSearchBarButton();
-        searchBarSteps.checkMessageSearchBarNoProductList();
+        searchBarSteps.checkMessageSearchBarNoProductFound();
+    }
+
+    @Test
+    public void searchWithAllCaps(){
+        searchBarSteps.navigateToHomePage();
+        searchBarSteps.navigateToSearchBar();
+        searchBarSteps.writeProductName("V NECK");
+        searchBarSteps.clickSearchBarButton();
+        searchBarSteps.checkSearchResultForProduct("V-Neck");
     }
 }

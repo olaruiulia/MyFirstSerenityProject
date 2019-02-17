@@ -10,9 +10,9 @@ import org.junit.Assert;
 
 public class ProductsSteps extends ScenarioSteps {
 
-    HomePage homePage;
-    ShopPage shopPage;
-    CartPage cartPage;
+    private HomePage homePage;
+    private ShopPage shopPage;
+    private CartPage cartPage;
 
     @Step
     public void navigateToHomePage(){
@@ -26,18 +26,20 @@ public class ProductsSteps extends ScenarioSteps {
     }
 
     @Step
-    public void selectProduct(){
-        Assert.assertTrue(shopPage.selectProduct());
-    }
-    @Step
-    public void selectProductFromList(){
-        Assert.assertTrue(shopPage.selectProductFromList());
+    public void selectProductFromList(String productName){
+        shopPage.selectProductFromList(productName);
     }
 
     @Step
-    public void selectProductFromIfList(){
-        shopPage.findProductFromListWithIf();
+    public void findProductFromListWithIf(String nonExistent, String existingProduct){
+        shopPage.findProductFromListWithIf(nonExistent,existingProduct);
     }
+
+    @Step
+    public void checkSearchResultForProduct(String productName){
+        Assert.assertTrue(shopPage.checkSearchResultForProduct(productName));
+    }
+
     @Step
     public void clickAddToCart(){
         shopPage.clickAddToCart();
@@ -53,20 +55,15 @@ public class ProductsSteps extends ScenarioSteps {
     }
 
     @Step
-    public void checkProductAddedToCart(){
-        Assert.assertTrue(cartPage.checkProductInCart());
-    }
-
-    @Step
-    public void checkProductInCartFromIfList(){
-        Assert.assertTrue(cartPage.checkIfProductInCart());
+    public void checkProductAddedToCart(String productName){
+        Assert.assertTrue(cartPage.checkProductInCart(productName));
     }
 
     @StepGroup
-    public void addToCartItem(){
+    public void addToCartItem(String productName){
         navigateToHomePage();
         navigateToShopPage();
-        selectProduct();
+        selectProductFromList(productName);
         clickAddToCart();
         navigateToCartButton();
     }

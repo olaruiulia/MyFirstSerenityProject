@@ -1,9 +1,7 @@
 package com.fast.features;
 
-
-import com.fast.steps.serenity.CartSteps;
-import com.fast.steps.serenity.CheckoutSteps;
-import com.fast.steps.serenity.ProductsSteps;
+import com.fast.steps.serenity.*;
+import com.fast.utils.Constants;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Managed;
 import net.thucydides.core.annotations.Steps;
@@ -18,17 +16,23 @@ public class CheckoutTests {
     private WebDriver webDriver;
 
     @Steps
-    ProductsSteps productsSteps;
+    LoginSteps loginSteps;
 
     @Steps
-    CartSteps cartSteps;
+    private ProductsSteps productsSteps;
 
     @Steps
-    CheckoutSteps checkoutSteps;
+    private CartSteps cartSteps;
+
+    @Steps
+    private CheckoutSteps checkoutSteps;
+
+    @Steps
+    private AdminSteps adminSteps;
 
     @Test
     public void checkout(){
-        productsSteps.addToCartItem();
+        productsSteps.addToCartItem("Polo");
         cartSteps.clickCheckoutButton();
         checkoutSteps.setFirstName();
         checkoutSteps.setLastName();
@@ -44,7 +48,7 @@ public class CheckoutTests {
 
     @Test
     public void checkoutInvalid(){
-        productsSteps.addToCartItem();
+        productsSteps.addToCartItem("Polo");
         cartSteps.clickCheckoutButton();
         checkoutSteps.setFirstName();
         checkoutSteps.setLastName();
@@ -59,5 +63,32 @@ public class CheckoutTests {
         checkoutSteps.createAccountInBilling();
         checkoutSteps.setCreateAccountPasswordInCheckout();
         checkoutSteps.setOrderComments();
+    }
+
+    @Test
+    public void checkOrderInAdmin() {
+        loginSteps.login("Hello olaru_iulia");
+        productsSteps.addToCartItem("Beanie with Logo");
+        cartSteps.clickCheckoutButton();
+        checkoutSteps.setFirstName();
+        checkoutSteps.setLastName();
+        checkoutSteps.chooseCountry();
+        checkoutSteps.setCityName();
+        checkoutSteps.setStreetAddress();
+        checkoutSteps.setPostcode();
+        checkoutSteps.setPhoneNumber();
+        checkoutSteps.setEmailAddress();
+        checkoutSteps.clickPlaceOrderButton();
+        checkoutSteps.checkOrderReceivedMessage();
+        loginSteps.clickMyAccountButton();
+        loginSteps.clickLogoutButton();
+        loginSteps.setUserEmail(Constants.ADMIN_USERNAME);
+        loginSteps.setPassword(Constants.ADMIN_PASSWORD);
+        loginSteps.clickOnLoginButton();
+        adminSteps.selectDashboard();
+        adminSteps.clickOnDashboard();
+        adminSteps.selectMainMenuCategory("WooCommerce");
+        adminSteps.clickOnOrdersButton();
+        adminSteps.checkOrderUsernameList();
     }
 }

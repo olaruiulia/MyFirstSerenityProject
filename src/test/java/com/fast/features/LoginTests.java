@@ -1,6 +1,7 @@
 package com.fast.features;
 
 import com.fast.steps.serenity.LoginSteps;
+import com.fast.utils.Constants;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Managed;
 import net.thucydides.core.annotations.Steps;
@@ -15,44 +16,48 @@ public class LoginTests {
     private WebDriver driver;
 
     @Steps
-    LoginSteps loginSteps;
+    private LoginSteps loginSteps;
 
     @Test
     public void validLoginTest() {
         loginSteps.navigateToHomepage();
-        loginSteps.goToLogin();
-        loginSteps.setUser();
-        loginSteps.setPassword();
+        loginSteps.clickMyAccountButton();
+        loginSteps.setUserEmail(Constants.USER_EMAIL);
+        loginSteps.setPassword(Constants.USER_PASSWORD);
         loginSteps.clickOnLoginButton();
-        loginSteps.checkLoggedIn();
+        loginSteps.checkLoggedIn("Hello olaru_iulia");
     }
 
     @Test
     public void loginAsAdmin() {
         loginSteps.navigateToHomepage();
-        loginSteps.goToLogin();
-        loginSteps.setUserAdmin();
-        loginSteps.setPasswordAdmin();
+        loginSteps.clickMyAccountButton();
+        loginSteps.setUserEmail(Constants.ADMIN_USERNAME);
+        loginSteps.setPassword(Constants.ADMIN_PASSWORD);
         loginSteps.clickOnLoginButton();
-        loginSteps.checkLoggedInAdmin();
+        loginSteps.checkLoggedIn("Hello admin");
     }
 
     @Test
     public void invalidLogin() {
         loginSteps.navigateToHomepage();
-        loginSteps.goToLogin();
-        loginSteps.setUser();
-        loginSteps.setPassword2();
+        loginSteps.clickMyAccountButton();
+        loginSteps.setUserEmail(Constants.USER_EMAIL);
+        loginSteps.setPassword("weak");
         loginSteps.clickOnLoginButton();
-        loginSteps.checkInvalidLoginMessage();
         loginSteps.invalidLoginIfStep();
         loginSteps.clickOnLoginButton();
 
     }
 
     @Test
-    public void validLogin() {
-        loginSteps.login();
+    public void loginWithUpperCase(){
+        loginSteps.navigateToHomepage();
+        loginSteps.clickMyAccountButton();
+        loginSteps.setUserEmail("OLARU_IULIA");
+        loginSteps.setPassword(Constants.USER_PASSWORD);
+        loginSteps.clickOnLoginButton();
+        loginSteps.checkLoggedIn("Hello olaru_iulia");
     }
 
 }

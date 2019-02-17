@@ -5,6 +5,7 @@ import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.pages.PageObject;
 
+
 @DefaultUrl("http://qa5.fasttrackit.org:8008/?page_id=6")
 public class CheckoutPage extends PageObject {
 
@@ -57,80 +58,79 @@ public class CheckoutPage extends PageObject {
     private WebElementFacade wrongEmail;
 
 
-
-    public void clickOnProceedToCheckOutButton(){
+    public void clickOnProceedToCheckOutButton() {
         clickOn(proceedToCheckoutButton);
     }
 
-    public void setBillingFirstName(){
-        typeInto(billingFirstName,"Lilla");
+    public void setBillingFirstName(String firstName) {
+        typeInto(billingFirstName, firstName);
     }
 
-    public void setBillingLastName(){
-        typeInto(billingLastName,"Okoska");
+    public void setBillingLastName(String lastName) {
+        typeInto(billingLastName, lastName);
     }
 
-    public void clickOnCountryDropDown(){
-        dropdownCountry.selectByVisibleText("Romania");
+    public void clickOnCountryDropDown(String country) {
+        dropdownCountry.selectByVisibleText(country);
     }
 
-    public void setStreetAddress (){
-        typeInto(streetAddress, "blabla");
+    public void setStreetAddress(String street) {
+        typeInto(streetAddress, street);
     }
 
-    public void setCityName (){
-        typeInto(cityName,"Cluj");
+    public void setCityName(String city) {
+        typeInto(cityName, city);
     }
 
-    public void setBillingPostCode(){
-        typeInto(billingPostCode,"225478");
+    public void setBillingPostCode(String postCode) {
+        typeInto(billingPostCode, postCode);
     }
 
-    public void setBillingPhoneNumber(){
-        typeInto(billingPhoneNumber,"4875874569554");
+    public void setBillingPhoneNumber(String phoneNumber) {
+        typeInto(billingPhoneNumber, phoneNumber);
     }
 
-    public void setBillingPhoneNumberWithoutValue(){
-        typeInto(billingPhoneNumber,"");
+    public void setBillingPhoneNumberWithoutValue(String wrongNumber) {
+        typeInto(billingPhoneNumber, wrongNumber);
     }
 
-    public void setBillingEmail(){
-        typeInto(billingEmail, "hahahah@email.com");
+    public void setBillingEmail(String email) {
+        typeInto(billingEmail, email);
     }
 
-    public void setBillingEmailInvalid(){
-        typeInto(billingEmail,"hhh@.com");
+    public void setBillingEmailInvalid(String invalidEmail) {
+        typeInto(billingEmail, invalidEmail);
     }
 
-    public void createAccountCheckBox(){
+    public void createAccountCheckBox() {
         clickOn(createAccountCheckBox);
     }
 
-    public void setCreateAccountPasswordInCheckout(){
-        typeInto(createAccountPasswordInCheckout,"anythingispossible");
+    public void setCreateAccountPasswordInCheckout(String password) {
+        typeInto(createAccountPasswordInCheckout, password);
     }
 
 
-    public void clickOnPlaceOrderButton(){
+    public void clickOnPlaceOrderButton() {
         clickOn(placeOrderButton);
     }
 
-    public void setOrderComments(){
-        typeInto(orderCommnets,"i don't have anything to add");
+    public void setOrderComments(String comment) {
+        typeInto(orderCommnets, comment);
     }
 
 
-    public boolean checkOrderPlacement(){
+    public boolean checkOrderPlacement(String orderPlacementMessage) {
         waitFor(orderRecievedMessage);
         System.out.println(orderRecievedMessage.getText());
-        return orderRecievedMessage.containsText("Thank you. Your order has been received.");
+        return orderRecievedMessage.containsText(orderPlacementMessage);
     }
 
-    public boolean missingDetails(){
-        if ((missingPhone.getText().contains("Billing Phone is a required field.")) && (wrongEmail.getText().contains("Billing Email address is not a valid email address."))){
+    public boolean missingDetails(String missingPhoneNO, String wrongEmailAddress, String newNumber, String newEmail) {
+        if ((missingPhone.getText().contains(missingPhoneNO)) && (wrongEmail.getText().contains(wrongEmailAddress))) {
             System.out.println("You better work!");
-            typeInto(billingPhoneNumber,"0788569421");
-            typeInto(billingEmail,"hhh@email.com");
+            typeInto(billingPhoneNumber, newNumber);
+            typeInto(billingEmail, newEmail);
             return true;
         }
         return false;

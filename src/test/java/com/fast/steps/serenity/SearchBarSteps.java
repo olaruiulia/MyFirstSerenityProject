@@ -11,56 +11,52 @@ import org.junit.Assert;
 public class SearchBarSteps extends ScenarioSteps {
 
 
-    HomePage homePage;
-    SearchBarPage searchBarPage;
-    ShopPage shopPage;
+    private HomePage homePage;
+    private SearchBarPage searchBarPage;
+    private ShopPage shopPage;
 
 
-    private String searchTermLength = RandomStringUtils.randomAlphabetic(25);
+    private String searchTermLength = RandomStringUtils.randomAlphabetic(50);
 
     @Step
-    public void navigateToHomePage (){
+    public void navigateToHomePage() {
         getDriver().manage().window().maximize();
         homePage.open();
     }
 
     @Step
-    public void navigateToSearchBar(){
+    public void navigateToSearchBar() {
         searchBarPage.navigateToSearchBar();
     }
 
     @Step
-    public void writeProductName(){
-        searchBarPage.enterProductCap();
+    public void writeProductName(String productName) {
+        searchBarPage.enterProduct(productName);
     }
 
     @Step
-    public void clickSearchBarButton(){
+    public void clickSearchBarButton() {
         searchBarPage.clickSearchBarButton();
     }
 
     @Step
-    public void enterSearchTermLength (){
+    public void enterSearchTermLength() {
         searchBarPage.enterSearchTermLength(searchTermLength);
     }
 
     @Step
-    public void checkProductCap (){
-        Assert.assertTrue(shopPage.checkSearchResultForCap());
+    public void writeFromList() {
+        searchBarPage.setListSearchTerms("Hoodie with Zipper", "blue", "album", "yellow", "car", "25789", "ELEMENT", "%$&!** !");
     }
 
     @Step
-    public void checkMessageSearchBarNoProductFound(){
-        Assert.assertTrue(shopPage.checkMessageSearchBarNoProductFound());
+    public void checkSearchResultForProduct(String productNameResult) {
+        Assert.assertTrue(shopPage.checkSearchResultForProduct(productNameResult));
     }
 
     @Step
-    public void writeFromList(){
-        searchBarPage.setListSearchTerms();
+    public void checkMessageSearchBarNoProductFound() {
+        Assert.assertTrue(shopPage.checkMessageSearchBarNoProductFound("No products were found matching your selection."));
     }
 
-    @Step
-    public void checkMessageSearchBarNoProductList(){
-        Assert.assertTrue(shopPage.checkMessageSearchBarNoProductList());
-    }
 }

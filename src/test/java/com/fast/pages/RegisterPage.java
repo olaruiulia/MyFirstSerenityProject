@@ -19,17 +19,25 @@ public class RegisterPage extends PageObject {
     @FindBy (css = "button[name=register]")
     private WebElementFacade registerButton;
 
+    @FindBy(css = ".woocommerce-password-strength.short")
+    private WebElementFacade weakPasswordAlert;
+
 
     public void setRegisterEmailField(String email){
         typeInto(registerEmailField,email);
     }
 
-    public void setRegisterPasswordField(){
-        typeInto(registerPasswordField,"somethingelse1234");
+    public void setRegisterPasswordField(String password){
+        typeInto(registerPasswordField,password);
     }
 
     public void clickOnRegisterButton(){
         clickOn(registerButton);
+    }
+
+    public boolean checkWeakPasswordAlert(String alertMessage){
+        waitFor(weakPasswordAlert);
+        return weakPasswordAlert.containsText(alertMessage);
     }
 
 

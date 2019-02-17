@@ -1,4 +1,5 @@
 package com.fast.steps.serenity;
+
 import com.fast.pages.CartPage;
 import com.fast.pages.HomePage;
 import net.thucydides.core.annotations.Step;
@@ -8,52 +9,67 @@ import org.junit.Assert;
 public class CartSteps extends ScenarioSteps {
 
 
-    CartPage cartPage;
-    HomePage homePage;
+    private CartPage cartPage;
+    private HomePage homePage;
 
     @Step
-    public void navigateToHomePage(){
+    public void navigateToHomePage() {
         getDriver().manage().window().maximize();
         homePage.open();
     }
 
     @Step
-    public void navigateToShopButton(){
+    public void navigateToShopButton() {
         homePage.clickShopButton();
     }
 
     @Step
-    public void navigateToCartButton(){
+    public void navigateToCartButton() {
         homePage.clickCartButton();
     }
 
     @Step
-    public void changeProductQuantity(){
-        cartPage.changeQuantity();
+    public void changeProductQuantity(String quantity) {
+        cartPage.changeQuantity(quantity);
     }
 
     @Step
-    public void clickUpdateCart(){
+    public void clickUpdateCart() {
         cartPage.clickUpdateCartButton();
     }
 
     @Step
-    public void clickCheckoutButton(){
+    public void clickCheckoutButton() {
         cartPage.proceedToCheckoutButton();
     }
 
     @Step
-    public void checkQuantityPriceUpdate(){
+    public void checkQuantityPriceUpdate() {
         cartPage.checkQuantityPriceUpdate();
     }
 
     @Step
-    public void clickOnProductRemoveButton(){
+    public void clickOnProductRemoveButton() {
         cartPage.clickOnProductRemoveButton();
     }
 
     @Step
-    public void checkProductRemove(){
-        Assert.assertTrue(cartPage.checkProductRemove());
+    public void checkProductRemoveMessage() {
+        Assert.assertTrue(cartPage.checkProductRemoveMessage("removed"));
+    }
+
+    @Step
+    public void setCouponCodeField(){
+        cartPage.setCouponCodeField("54287ddA");
+    }
+
+    @Step
+    public void clickOnApplyCouponButton(){
+        cartPage.clickOnApplyCouponButton();
+    }
+
+    @Step
+    public void checkCouponInvalidMessage(){
+        Assert.assertTrue(cartPage.checkCouponInvalidMessage("does not exist"));
     }
 }
