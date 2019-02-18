@@ -31,7 +31,7 @@ public class CheckoutTests {
     private AdminSteps adminSteps;
 
     @Test
-    public void checkout(){
+    public void checkout() {
         productsSteps.addToCartItem("Polo");
         cartSteps.clickCheckoutButton();
         checkoutSteps.setFirstName("Sebastian");
@@ -47,7 +47,7 @@ public class CheckoutTests {
     }
 
     @Test
-    public void checkoutInvalid(){
+    public void checkoutInvalid() {
         productsSteps.addToCartItem("Polo");
         cartSteps.clickCheckoutButton();
         checkoutSteps.setFirstName("Sebastian");

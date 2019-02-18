@@ -18,7 +18,7 @@ public class SearchBarTests {
     private SearchBarSteps searchBarSteps;
 
     @Test
-    public void searchByProductName(){
+    public void searchByProductName() {
         searchBarSteps.navigateToHomePage();
         searchBarSteps.navigateToSearchBar();
         searchBarSteps.writeProductName("cap");
@@ -27,7 +27,7 @@ public class SearchBarTests {
     }
 
     @Test
-    public void searchWithRandomString(){
+    public void searchWithRandomString() {
         searchBarSteps.navigateToHomePage();
         searchBarSteps.navigateToSearchBar();
         searchBarSteps.enterSearchTermLength();
@@ -36,7 +36,7 @@ public class SearchBarTests {
     }
 
     @Test
-    public void writeFromList(){
+    public void writeFromList() {
         searchBarSteps.navigateToHomePage();
         searchBarSteps.navigateToSearchBar();
         searchBarSteps.writeFromList();
@@ -45,7 +45,7 @@ public class SearchBarTests {
     }
 
     @Test
-    public void searchWithAllCaps(){
+    public void searchWithAllCaps() {
         searchBarSteps.navigateToHomePage();
         searchBarSteps.navigateToSearchBar();
         searchBarSteps.writeProductName("V NECK");

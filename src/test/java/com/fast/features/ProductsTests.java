@@ -54,7 +54,7 @@ public class ProductsTests {
     }
 
     @Test
-    public void addToCartMultipleProducts(){
+    public void addToCartMultipleProducts() {
         productsSteps.navigateToHomePage();
         productsSteps.navigateToShopPage();
         productsSteps.selectProductFromList("Hoodie with Zipper");

@@ -51,7 +51,7 @@ public class LoginTests {
     }
 
     @Test
-    public void loginWithUpperCase(){
+    public void loginWithUpperCase() {
         loginSteps.navigateToHomepage();
         loginSteps.clickMyAccountButton();
         loginSteps.setUserEmail("OLARU_IULIA");

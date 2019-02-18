@@ -70,7 +70,7 @@ public class AdminTests {
     }
 
     @Test
-    public void deleteProduct(){
+    public void deleteProduct() {
         loginSteps.loginAsAdmin("Hello admin");
         adminSteps.selectDashboard();
         adminSteps.clickOnDashboard();
@@ -84,7 +84,6 @@ public class AdminTests {
         adminSteps.clickOnApplyButtonForBulkActions();
         adminSteps.checkDeletedProductMessage();
     }
-
 
 
 }
