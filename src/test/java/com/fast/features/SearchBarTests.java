@@ -21,7 +21,7 @@ public class SearchBarTests {
     public void searchByProductName(){
         searchBarSteps.navigateToHomePage();
         searchBarSteps.navigateToSearchBar();
-        searchBarSteps.writeProductName("Cap");
+        searchBarSteps.writeProductName("cap");
         searchBarSteps.clickSearchBarButton();
         searchBarSteps.checkSearchResultForProduct("Cap");
     }

@@ -5,7 +5,6 @@ import com.fast.pages.MyAccountPage;
 import com.fast.pages.RegisterPage;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.steps.ScenarioSteps;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Assert;
 
 public class RegisterSteps extends ScenarioSteps {
@@ -13,9 +12,6 @@ public class RegisterSteps extends ScenarioSteps {
     private HomePage homePage;
     private RegisterPage registerPage;
     private MyAccountPage myAccountPage;
-
-//    private String userName = RandomStringUtils.randomAlphanumeric(7);
-//    private String email = userName + "@email.com";
 
     @Step
     public void navigateToHomePage() {
@@ -34,11 +30,6 @@ public class RegisterSteps extends ScenarioSteps {
     }
 
     @Step
-    public void setEMail(){
-        registerPage.setRegisterEmailField("addsomeone@email.com");
-    }
-
-    @Step
     public void setPasswordField(String password) {
         registerPage.setRegisterPasswordField(password);
     }
@@ -54,7 +45,7 @@ public class RegisterSteps extends ScenarioSteps {
     }
 
     @Step
-    public void  checkWeakPasswordAlert(){
+    public void checkWeakPasswordAlert() {
         Assert.assertTrue(registerPage.checkWeakPasswordAlert("Very weak"));
     }
 

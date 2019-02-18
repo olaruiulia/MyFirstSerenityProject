@@ -35,6 +35,7 @@ public class CartTests {
         cartSteps.navigateToShopButton();
         productsSteps.selectProductFromList("Polo");
         productsSteps.clickAddToCart();
+        productsSteps.checkProductAddedToCartMessage();
         cartSteps.navigateToCartButton();
         cartSteps.changeProductQuantity("17");
         cartSteps.clickUpdateCart();

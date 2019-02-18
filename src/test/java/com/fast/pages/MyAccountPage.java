@@ -17,13 +17,11 @@ public class MyAccountPage extends PageObject {
 
     public boolean checkLoggedIn(String loginMessage) {
         waitFor(welcomeMessageStrong);
-        System.out.println(welcomeMessageStrong.getText());
         return welcomeMessageStrong.containsText(loginMessage);
     }
 
     public boolean checkRegister(String username) {
         waitFor(welcomeMessageStrong);
-        System.out.println(welcomeMessageStrong.getText());
         return welcomeMessageStrong.containsText("Hello " + username);
     }
 

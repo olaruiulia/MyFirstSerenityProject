@@ -4,9 +4,7 @@ import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.pages.PageObject;
-import org.yecht.Data;
 
-import java.util.List;
 
 @DefaultUrl("http://qa5.fasttrackit.org:8008/?page_id=5")
 public class CartPage extends PageObject {
@@ -66,7 +64,6 @@ public class CartPage extends PageObject {
 
     public boolean checkProductInCart(String productName) {
         waitFor(productNameInCart);
-        System.out.println("the product name is: "+productNameInCart.getText());
         return productNameInCart.containsText(productName);
     }
 
@@ -90,7 +87,7 @@ public class CartPage extends PageObject {
         int multipleQtyProduct = productPriceFin * quantityFieldConvert;
 
         if ((multipleQtyProduct == totalPriceFin) && (multipleQtyProduct == subtotalFin) && (totalPriceFin == subtotalFin)) {
-            System.out.println("You better work!");
+            waitFor(checkoutButton);
             clickOn(checkoutButton);
         }
     }
@@ -99,26 +96,25 @@ public class CartPage extends PageObject {
         clickOn(checkoutButton);
     }
 
-    public void clickOnProductRemoveButton(){
+    public void clickOnProductRemoveButton() {
         clickOn(productRemoveButton);
     }
 
-    public boolean checkProductRemoveMessage(String removedMessage){
+    public boolean checkProductRemoveMessage(String removedMessage) {
         waitFor(removedMessageInCart);
         return removedMessageInCart.containsText(removedMessage);
     }
 
-    public void setCouponCodeField(String coupon){
-        typeInto(couponCodeField,coupon);
+    public void setCouponCodeField(String coupon) {
+        typeInto(couponCodeField, coupon);
     }
 
-    public void clickOnApplyCouponButton(){
+    public void clickOnApplyCouponButton() {
         clickOn(applyCouponButton);
     }
 
-    public boolean checkCouponInvalidMessage(String invalidCouponMessage){
+    public boolean checkCouponInvalidMessage(String invalidCouponMessage) {
         waitFor(couponInvalidMessage);
-        System.out.println(couponInvalidMessage.getText());
         return couponInvalidMessage.containsText(invalidCouponMessage);
     }
 

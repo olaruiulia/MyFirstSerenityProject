@@ -16,7 +16,7 @@ public class CheckoutTests {
     private WebDriver webDriver;
 
     @Steps
-    LoginSteps loginSteps;
+    private LoginSteps loginSteps;
 
     @Steps
     private ProductsSteps productsSteps;
@@ -34,8 +34,8 @@ public class CheckoutTests {
     public void checkout(){
         productsSteps.addToCartItem("Polo");
         cartSteps.clickCheckoutButton();
-        checkoutSteps.setFirstName();
-        checkoutSteps.setLastName();
+        checkoutSteps.setFirstName("Sebastian");
+        checkoutSteps.setLastName("Vettel");
         checkoutSteps.chooseCountry();
         checkoutSteps.setCityName();
         checkoutSteps.setStreetAddress();
@@ -50,8 +50,8 @@ public class CheckoutTests {
     public void checkoutInvalid(){
         productsSteps.addToCartItem("Polo");
         cartSteps.clickCheckoutButton();
-        checkoutSteps.setFirstName();
-        checkoutSteps.setLastName();
+        checkoutSteps.setFirstName("Sebastian");
+        checkoutSteps.setLastName("Vettel");
         checkoutSteps.chooseCountry();
         checkoutSteps.setCityName();
         checkoutSteps.setStreetAddress();
@@ -70,8 +70,8 @@ public class CheckoutTests {
         loginSteps.login("Hello olaru_iulia");
         productsSteps.addToCartItem("Beanie with Logo");
         cartSteps.clickCheckoutButton();
-        checkoutSteps.setFirstName();
-        checkoutSteps.setLastName();
+        checkoutSteps.setFirstName("Luis");
+        checkoutSteps.setLastName("Hamilton");
         checkoutSteps.chooseCountry();
         checkoutSteps.setCityName();
         checkoutSteps.setStreetAddress();
@@ -89,6 +89,11 @@ public class CheckoutTests {
         adminSteps.clickOnDashboard();
         adminSteps.selectMainMenuCategory("WooCommerce");
         adminSteps.clickOnOrdersButton();
-        adminSteps.checkOrderUsernameList();
+        adminSteps.clickAndSetSearchOrdersFieldInAdmin();
+        adminSteps.clickOnCheckColumnBox();
+        adminSteps.hoverOverBulkActionsDropdown();
+        adminSteps.clickOnMoveToTrashButton();
+        adminSteps.clickOnApplyButtonForBulkActions();
+
     }
 }

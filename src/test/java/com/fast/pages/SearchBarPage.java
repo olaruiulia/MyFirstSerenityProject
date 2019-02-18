@@ -48,8 +48,6 @@ public class SearchBarPage extends PageObject {
 
         String listA = listSearchTerms.get(5);
         typeInto(searchBarField, listA);
-
     }
-
 
 }

@@ -2,7 +2,6 @@ package com.fast.steps.serenity;
 
 import com.fast.pages.CheckoutPage;
 import net.thucydides.core.annotations.Step;
-import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.steps.ScenarioSteps;
 import org.junit.Assert;
 
@@ -11,13 +10,13 @@ public class CheckoutSteps extends ScenarioSteps {
     private CheckoutPage checkoutPage;
 
     @Step
-    public void setFirstName(){
-        checkoutPage.setBillingFirstName("Lilla");
+    public void setFirstName(String firstName){
+        checkoutPage.setBillingFirstName(firstName);
     }
 
     @Step
-    public void setLastName(){
-        checkoutPage.setBillingLastName("Okoska");
+    public void setLastName(String lastName){
+        checkoutPage.setBillingLastName(lastName);
     }
 
     @Step
@@ -32,7 +31,7 @@ public class CheckoutSteps extends ScenarioSteps {
 
     @Step
     public void setCityName(){
-        checkoutPage.setCityName("Cluj");
+        checkoutPage.setCityName("Cluj Napoca");
     }
 
     @Step
@@ -42,12 +41,12 @@ public class CheckoutSteps extends ScenarioSteps {
 
     @Step
     public void setPhoneNumber(){
-        checkoutPage.setBillingPhoneNumber("4875874569554");
+        checkoutPage.setBillingPhoneNumber("+00875874569554");
     }
 
     @Step
     public void setEmailAddress(){
-        checkoutPage.setBillingEmail("nothingserious@email.com");
+        checkoutPage.setBillingEmail("formula1@email.com");
     }
 
     @Step
@@ -62,7 +61,7 @@ public class CheckoutSteps extends ScenarioSteps {
 
     @Step
     public void setOrderComments(){
-        checkoutPage.setOrderComments("I don't have anything to add");
+        checkoutPage.setOrderComments("Watch me race");
     }
 
     @Step
@@ -82,7 +81,7 @@ public class CheckoutSteps extends ScenarioSteps {
 
     @Step
     public void setWrongEmail(){
-        checkoutPage.setBillingEmailInvalid("hhh@.com");
+        checkoutPage.setBillingEmailInvalid("nonexisting@.com");
     }
 
     @Step
@@ -90,18 +89,4 @@ public class CheckoutSteps extends ScenarioSteps {
         checkoutPage.missingDetails("Billing Phone is a required field.", "Billing Email address is not a valid email address.","0788569421","new.email@email.com" );
     }
 
-    @StepGroup
-    public void setCheckoutPage(){
-        setFirstName();
-        setLastName();
-        chooseCountry();
-        setStreetAddress();
-        setCityName();
-        setPostcode();
-        setPhoneNumber();
-        setEmailAddress();
-        clickPlaceOrderButton();
-        checkOrderReceivedMessage();
-
-    }
 }

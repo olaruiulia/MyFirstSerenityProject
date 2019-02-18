@@ -1,4 +1,5 @@
 package com.fast.pages;
+
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
@@ -25,13 +26,16 @@ public class ShopPage extends PageObject {
     @FindBy(css = "div.content-inner p")
     private WebElementFacade noSearchResultMessage;
 
-    public void clickShopButton(){
+    @FindBy(css = ".woocommerce-message ")
+    private WebElementFacade productAddedToCartMessage;
+
+    public void clickShopButton() {
         clickOn(shopButton);
     }
 
-    public boolean selectProductFromList(String productName){
-        for (WebElementFacade product : listOfProducts){
-            if (product.getText().contains(productName)){
+    public boolean selectProductFromList(String productName) {
+        for (WebElementFacade product : listOfProducts) {
+            if (product.getText().contains(productName)) {
                 clickOn(product);
                 return true;
             }
@@ -39,12 +43,12 @@ public class ShopPage extends PageObject {
         return false;
     }
 
-    public boolean findProductFromListWithIf(String nonExistent, String existingProduct){
-        for (WebElementFacade findProduct : listOfProducts){
-            if (findProduct.getText().contains(nonExistent)){
+    public boolean findProductFromListWithIf(String nonExistent, String existingProduct) {
+        for (WebElementFacade findProduct : listOfProducts) {
+            if (findProduct.getText().contains(nonExistent)) {
                 clickOn(findProduct);
                 return true;
-            }else if (findProduct.getText().contains(existingProduct)){
+            } else if (findProduct.getText().contains(existingProduct)) {
                 clickOn(findProduct);
                 return true;
             }
@@ -52,7 +56,7 @@ public class ShopPage extends PageObject {
         return false;
     }
 
-    public void clickAddToCart(){
+    public void clickAddToCart() {
         clickOn(addToCart);
     }
 
@@ -61,12 +65,15 @@ public class ShopPage extends PageObject {
         return searchResultProduct.containsText(productName);
     }
 
-    public boolean checkMessageSearchBarNoProductFound(String errorMessage){
+    public boolean checkMessageSearchBarNoProductFound(String errorMessage) {
         waitFor(noSearchResultMessage);
-        System.out.println(noSearchResultMessage.getText());
         return noSearchResultMessage.containsText(errorMessage);
     }
 
+    public boolean checkProductAddedToCartMessage(String message){
+        waitFor(productAddedToCartMessage);
+        return productAddedToCartMessage.containsText(message);
+    }
 
 
 }

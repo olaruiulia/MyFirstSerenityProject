@@ -8,7 +8,7 @@ import org.junit.Assert;
 public class AdminSteps extends ScenarioSteps {
 
 
-    AdminPage adminPage;
+    private AdminPage adminPage;
 
     @Step
     public void selectDashboard() {
@@ -33,11 +33,6 @@ public class AdminSteps extends ScenarioSteps {
     @Step
     public void setNewTitleField() {
         adminPage.setNewTitleField("Broland sunglasses");
-    }
-
-    @Step
-    public void setDescriptionField() {
-        adminPage.setDescriptionField("If you'r not too cool for school, buy a backpack!");
     }
 
     @Step
@@ -98,19 +93,12 @@ public class AdminSteps extends ScenarioSteps {
     @Step
     public void clickOnSaveAttributes() {
         adminPage.clickOnSaveAttributesButton();
-
     }
 
     @Step
     public void clickOnAccessoriesCheckBox() {
         adminPage.clickOnAccessoriesCheckBox();
     }
-
-    @Step
-    public void clickOnNewTitleField() {
-        adminPage.clickOnNewTitleField();
-    }
-
 
     @Step
     public void clickOnPublishButton() {
@@ -123,56 +111,108 @@ public class AdminSteps extends ScenarioSteps {
     }
 
     @Step
-    public void clickOnAllProductsButton(){
+    public void clickOnAllProductsButton() {
         adminPage.clickOnAllProductsButton();
     }
 
     @Step
-    public void clickOnAllUsersButton(){
+    public void clickOnAllUsersButton() {
         adminPage.clickOnAllUsersButton();
     }
 
     @Step
-    public void adminBarMyAccountHoverOver(){
+    public void adminBarMyAccountHoverOver() {
         adminPage.adminBarMyAccountHoverOver();
     }
 
     @Step
-    public void clickOnAdminLogOutButton(){
+    public void clickOnAdminLogOutButton() {
         adminPage.clickOnAdminLogOutButton();
     }
 
     @Step
-    public void clickBackToPage(){
+    public void clickBackToPage() {
         adminPage.clickBackToPage();
     }
 
     @Step
-    public void checkExistingUser(String username){
+    public void checkExistingUser(String username) {
         Assert.assertTrue(adminPage.usernameList(username));
     }
 
     @Step
-    public void setUserSearchField(String username){
+    public void setUserSearchField(String username) {
         adminPage.setUserSearchField(username);
     }
 
     @Step
-    public void clickOnSearchUsersButton(){
+    public void clickOnSearchUsersButton() {
         adminPage.clickOnSearchUsersButton();
     }
 
     @Step
-    public void clickOnOrdersButton(){
+    public void clickOnOrdersButton() {
         adminPage.clickOnOrdersButton();
     }
 
     @Step
-    public void checkOrderUsernameList(){
-        adminPage.orderUsernameList("Lilla");
+    public void clickAndSetSearchOrdersFieldInAdmin(){
+        adminPage.clickOnSearchOrdersFieldInAdmin("Hamilton");
     }
 
+    @Step
+    public void clickOnProductImageButton() {
+        adminPage.clickOnProductImageButton();
+    }
 
+    @Step
+    public void setMediaSearchField() {
+        adminPage.setMediaSearchField("sunglasses");
+    }
 
+    @Step
+    public void clickOnProductThumbnail() {
+        adminPage.clickOnProductThumbnail();
+    }
+
+    @Step
+    public void clickOnSetProductImageButton() {
+        adminPage.clickOnSetProductImageButton();
+    }
+
+    @Step
+    public void setAllProductsSearchField() {
+        adminPage.setAllProductsSearchField("broland");
+    }
+
+    @Step
+    public void clickOnSearchProductsButton() {
+        adminPage.clickOnSearchProductsButton();
+    }
+
+    @Step
+    public void clickOnCheckColumnBox() {
+        adminPage.clickOnCheckColumnBox();
+    }
+
+    @Step
+    public void hoverOverBulkActionsDropdown() {
+        adminPage.hoverOverBulkActionsDropdown();
+    }
+
+    @Step
+    public void clickOnMoveToTrashButton() {
+        adminPage.clickOnMoveToTrashButton();
+    }
+
+    @Step
+    public void clickOnApplyButtonForBulkActions() {
+        adminPage.clickOnApplyButtonForBulkActions();
+    }
+
+    @Step
+    public void checkDeletedProductMessage() {
+        Assert.assertTrue(adminPage.checkDeletedProductMessage("product moved to the Trash"));
+    }
 
 }

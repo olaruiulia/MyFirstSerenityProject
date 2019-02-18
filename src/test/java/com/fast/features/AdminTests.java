@@ -29,6 +29,9 @@ public class AdminTests {
     @Steps
     private CheckoutSteps checkoutSteps;
 
+    @Steps
+    private SearchBarSteps searchBarSteps;
+
     @Test
     public void createProduct() {
         loginSteps.loginAsAdmin("Hello admin");
@@ -49,36 +52,39 @@ public class AdminTests {
         adminSteps.clickAttributesButton();
         adminSteps.chooseAllColor();
         adminSteps.clickOnSaveAttributes();
+        adminSteps.clickOnProductImageButton();
+        adminSteps.setMediaSearchField();
+        adminSteps.clickOnProductThumbnail();
+        adminSteps.clickOnSetProductImageButton();
         adminSteps.clickOnAccessoriesCheckBox();
         adminSteps.setNewTitleField();
         adminSteps.clickOnPublishButton();
         adminSteps.checkProductPublishMessage();
-    }
-
-    @Test
-    public void checkStockQuantity() {
-        loginSteps.loginAsAdmin("Hello admin");
-        adminSteps.selectDashboard();
-        adminSteps.clickOnDashboard();
-        adminSteps.selectMainMenuCategory("Products");
-        adminSteps.clickOnAllProductsButton();
         adminSteps.adminBarMyAccountHoverOver();
         adminSteps.clickOnAdminLogOutButton();
         adminSteps.clickBackToPage();
-        loginSteps.login("Hello olaru_iulia");
         productsSteps.navigateToShopPage();
-        productsSteps.selectProductFromList("Backpack3");
-        productsSteps.navigateToCartButton();
-        cartSteps.clickCheckoutButton();
-        checkoutSteps.setCheckoutPage();
-        loginSteps.clickMyAccountButton();
-        loginSteps.clickLogoutButton();
+        productsSteps.selectProductFromList("Broland");
+        searchBarSteps.checkSearchResultForProduct("Broland");
+
+    }
+
+    @Test
+    public void deleteProduct(){
         loginSteps.loginAsAdmin("Hello admin");
         adminSteps.selectDashboard();
         adminSteps.clickOnDashboard();
         adminSteps.selectMainMenuCategory("Products");
         adminSteps.clickOnAllProductsButton();
+        adminSteps.setAllProductsSearchField();
+        adminSteps.clickOnSearchProductsButton();
+        adminSteps.clickOnCheckColumnBox();
+        adminSteps.hoverOverBulkActionsDropdown();
+        adminSteps.clickOnMoveToTrashButton();
+        adminSteps.clickOnApplyButtonForBulkActions();
+        adminSteps.checkDeletedProductMessage();
     }
+
 
 
 }

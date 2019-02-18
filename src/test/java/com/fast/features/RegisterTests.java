@@ -47,7 +47,6 @@ public class RegisterTests {
         registerSteps.clickMyAccountButton();
         registerSteps.setEmailField(email);
         registerSteps.setPasswordField("simple");
-        registerSteps.clickRegisterButton();
         registerSteps.checkWeakPasswordAlert();
     }
 

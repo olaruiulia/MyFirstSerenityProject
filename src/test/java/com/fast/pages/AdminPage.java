@@ -27,9 +27,6 @@ public class AdminPage extends PageObject {
     @FindBy(css = "#titlewrap [type=text]")
     private WebElementFacade newTitleField;
 
-    @FindBy(css = "#tinymce")
-    private WebElementFacade shortDescriptionField;
-
     @FindBy(id = "_regular_price")
     private WebElementFacade regularPrice;
 
@@ -111,6 +108,42 @@ public class AdminPage extends PageObject {
     @FindBy(id = ".order-view strong")
     List<WebElementFacade> ordersList;
 
+    @FindBy(id = "set-post-thumbnail")
+    private WebElementFacade productImageButton;
+
+    @FindBy(id = "media-search-input")
+    private WebElementFacade mediaSearchField;
+
+    @FindBy(css = ".attachment-preview .thumbnail")
+    private WebElementFacade productThumbnail;
+
+    @FindBy(css = ".media-button-select")
+    private WebElementFacade setProductImageButton;
+
+    @FindBy(id = "post-search-input")
+    private WebElementFacade allProductsSearchField;
+
+    @FindBy(id = "search-submit")
+    private WebElementFacade searchProductsButton;
+
+    @FindBy(css = ".iedit .check-column [type='checkbox']")
+    private WebElementFacade checkColumnBox;
+
+    @FindBy(id = "bulk-action-selector-top")
+    private WebElementFacade bulkActionsDropdown;
+
+    @FindBy(css = "#bulk-action-selector-top [value='trash']")
+    private WebElementFacade moveToTrashButton;
+
+    @FindBy(id = "doaction")
+    private WebElementFacade applyButtonForBulkActions;
+
+    @FindBy(css = "#message p")
+    private WebElementFacade deletedProductMessage;
+
+    @FindBy(id = "post-search-input")
+    private WebElementFacade searchOrdersFieldInAdmin;
+
 
     public void selectDashboardHoverOver() {
         Actions action = new Actions(getDriver());
@@ -138,16 +171,8 @@ public class AdminPage extends PageObject {
         clickOn(addNewProductButton);
     }
 
-    public void clickOnAllUsersButton() {
-        clickOn(allUsersButton);
-    }
-
     public void setNewTitleField(String newProductName) {
         typeInto(newTitleField, newProductName);
-    }
-
-    public void setDescriptionField(String description) {
-        typeInto(shortDescriptionField, description);
     }
 
     public void setRegularPrice(String price) {
@@ -174,6 +199,22 @@ public class AdminPage extends PageObject {
         typeInto(stockQuantatyField, stockQuantity);
     }
 
+    public void clickOnProductImageButton() {
+        clickOn(productImageButton);
+    }
+
+    public void setMediaSearchField(String photoName) {
+        typeInto(mediaSearchField, photoName);
+    }
+
+    public void clickOnProductThumbnail() {
+        clickOn(productThumbnail);
+    }
+
+    public void clickOnSetProductImageButton() {
+        clickOn(setProductImageButton);
+    }
+
     public void clickAttributesButton() {
         clickOn(attributesButton);
     }
@@ -187,7 +228,6 @@ public class AdminPage extends PageObject {
     public void clickOnSelectColor() {
         clickOn(selectColor);
     }
-
 
     public void clickOnAddAttributesButton() {
         clickOn(addAttributesButton);
@@ -205,11 +245,6 @@ public class AdminPage extends PageObject {
         clickOn(accessoriesCheckBox);
     }
 
-    public void clickOnNewTitleField() {
-        waitFor(newTitleField);
-        clickOn(newTitleField);
-    }
-
     public void clickOnPublishButton() {
         waitFor(publishButton);
         clickOn(publishButton);
@@ -218,7 +253,6 @@ public class AdminPage extends PageObject {
 
     public boolean checkProductPublishMessage(String publishMessage) {
         waitFor(checkProductPublishMessage);
-        System.out.println(checkProductPublishMessage);
         return checkProductPublishMessage.containsText(publishMessage);
     }
 
@@ -226,28 +260,17 @@ public class AdminPage extends PageObject {
         clickOn(allProductsButton);
     }
 
-    public void adminBarMyAccountHoverOver() {
-        Actions action = new Actions(getDriver());
-        WebElementFacade e = adminBarMyAccount;
-        action.moveToElement(e).perform();
+    public void clickOnAllUsersButton() {
+        clickOn(allUsersButton);
     }
 
     public boolean usernameList(String username) {
         for (WebElementFacade userNames : newUsernames) {
             if (userNames.getText().contains(username)) {
-                System.out.println("The username exits!");
                 return true;
             }
         }
         return false;
-    }
-
-    public void clickOnAdminLogOutButton() {
-        clickOn(adminLogOutButton);
-    }
-
-    public void clickBackToPage() {
-        clickOn(backToHomePage);
     }
 
     public void setUserSearchField(String username) {
@@ -258,21 +281,58 @@ public class AdminPage extends PageObject {
         clickOn(searchUsersButton);
     }
 
+    public void adminBarMyAccountHoverOver() {
+        Actions action = new Actions(getDriver());
+        WebElementFacade e = adminBarMyAccount;
+        action.moveToElement(e).perform();
+    }
+
+    public void clickOnAdminLogOutButton() {
+        clickOn(adminLogOutButton);
+    }
+
+    public void clickBackToPage() {
+        clickOn(backToHomePage);
+    }
+
     public void clickOnOrdersButton() {
         clickOn(ordersButton);
     }
 
-    public boolean orderUsernameList(String orderUsername) {
-        for (WebElementFacade orders : ordersList) {
-            if (orders.getText().contains(orderUsername)) {
-                System.out.println("The username exits!");
-                return true;
-            }
-        }
-        return false;
+    public void clickOnSearchOrdersFieldInAdmin(String name){
+        searchOrdersFieldInAdmin.typeAndEnter(name);
     }
 
+    public void setAllProductsSearchField(String productName) {
+        typeInto(allProductsSearchField, productName);
+    }
 
+    public void clickOnSearchProductsButton() {
+        clickOn(searchProductsButton);
+    }
+
+    public void clickOnCheckColumnBox() {
+        clickOn(checkColumnBox);
+    }
+
+    public void hoverOverBulkActionsDropdown() {
+        Actions action = new Actions(getDriver());
+        WebElementFacade e = bulkActionsDropdown;
+        action.moveToElement(e).perform();
+    }
+
+    public void clickOnMoveToTrashButton() {
+        clickOn(moveToTrashButton);
+    }
+
+    public void clickOnApplyButtonForBulkActions() {
+        clickOn(applyButtonForBulkActions);
+    }
+
+    public boolean checkDeletedProductMessage(String message) {
+        waitFor(deletedProductMessage);
+        return deletedProductMessage.containsText(message);
+    }
 }
 
 

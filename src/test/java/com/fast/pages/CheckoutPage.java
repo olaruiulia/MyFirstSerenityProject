@@ -57,11 +57,6 @@ public class CheckoutPage extends PageObject {
     @FindBy(css = ".woocommerce-NoticeGroup li:nth-child(2)")
     private WebElementFacade wrongEmail;
 
-
-    public void clickOnProceedToCheckOutButton() {
-        clickOn(proceedToCheckoutButton);
-    }
-
     public void setBillingFirstName(String firstName) {
         typeInto(billingFirstName, firstName);
     }
@@ -110,7 +105,6 @@ public class CheckoutPage extends PageObject {
         typeInto(createAccountPasswordInCheckout, password);
     }
 
-
     public void clickOnPlaceOrderButton() {
         clickOn(placeOrderButton);
     }
@@ -119,10 +113,8 @@ public class CheckoutPage extends PageObject {
         typeInto(orderCommnets, comment);
     }
 
-
     public boolean checkOrderPlacement(String orderPlacementMessage) {
         waitFor(orderRecievedMessage);
-        System.out.println(orderRecievedMessage.getText());
         return orderRecievedMessage.containsText(orderPlacementMessage);
     }
 

@@ -27,7 +27,6 @@ public class ProductsTests {
     private CartSteps cartSteps;
 
     @Test
-
     public void addToCart() {
         loginSteps.login("Hello olaru_iulia");
         productsSteps.navigateToShopPage();
@@ -52,8 +51,6 @@ public class ProductsTests {
         productsSteps.checkProductAddedToCart("Single");
         cartSteps.clickOnProductRemoveButton();
         cartSteps.checkProductRemoveMessage();
-
-
     }
 
     @Test
@@ -63,14 +60,17 @@ public class ProductsTests {
         productsSteps.selectProductFromList("Hoodie with Zipper");
         productsSteps.checkSearchResultForProduct("Hoodie with Zipper");
         productsSteps.clickAddToCart();
+        productsSteps.checkProductAddedToCartMessage();
         productsSteps.navigateToShopPage();
         productsSteps.selectProductFromList("Polo");
         productsSteps.checkSearchResultForProduct("Polo");
         productsSteps.clickAddToCart();
+        productsSteps.checkProductAddedToCartMessage();
         productsSteps.navigateToShopPage();
         productsSteps.selectProductFromList("Long Sleeve Tee");
         productsSteps.checkSearchResultForProduct("Long Sleeve Tee");
         productsSteps.clickAddToCart();
+        productsSteps.checkProductAddedToCartMessage();
         productsSteps.navigateToCartButton();
 
     }

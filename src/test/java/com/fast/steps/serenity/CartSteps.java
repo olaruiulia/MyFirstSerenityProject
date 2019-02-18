@@ -59,17 +59,17 @@ public class CartSteps extends ScenarioSteps {
     }
 
     @Step
-    public void setCouponCodeField(){
+    public void setCouponCodeField() {
         cartPage.setCouponCodeField("54287ddA");
     }
 
     @Step
-    public void clickOnApplyCouponButton(){
+    public void clickOnApplyCouponButton() {
         cartPage.clickOnApplyCouponButton();
     }
 
     @Step
-    public void checkCouponInvalidMessage(){
+    public void checkCouponInvalidMessage() {
         Assert.assertTrue(cartPage.checkCouponInvalidMessage("does not exist"));
     }
 }
