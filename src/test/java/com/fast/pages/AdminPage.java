@@ -344,7 +344,6 @@ public class AdminPage extends PageObject {
         int generatedStock = 9;
 
         if ((stockNumberFin == generatedStock)) {
-            System.out.println("it works");
             clickOn(checkColumnBox);
         }
     }
