@@ -2,6 +2,7 @@ package com.fast.steps.serenity;
 
 import com.fast.pages.CheckoutPage;
 import net.thucydides.core.annotations.Step;
+import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.steps.ScenarioSteps;
 import org.junit.Assert;
 
@@ -87,6 +88,21 @@ public class CheckoutSteps extends ScenarioSteps {
     @Step
     public void missingDetails(){
         checkoutPage.missingDetails("Billing Phone is a required field.", "Billing Email address is not a valid email address.","0788569421","new.email@email.com" );
+    }
+
+    @StepGroup
+    public void setCheckoutPage(String firstName, String lastName){
+        setFirstName(firstName);
+        setLastName(lastName);
+        chooseCountry();
+        setStreetAddress();
+        setCityName();
+        setPostcode();
+        setPhoneNumber();
+        setEmailAddress();
+        clickPlaceOrderButton();
+        checkOrderReceivedMessage();
+
     }
 
 }

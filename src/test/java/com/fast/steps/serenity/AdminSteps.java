@@ -156,7 +156,7 @@ public class AdminSteps extends ScenarioSteps {
     }
 
     @Step
-    public void clickAndSetSearchOrdersFieldInAdmin(){
+    public void clickAndSetSearchOrdersFieldInAdmin() {
         adminPage.clickOnSearchOrdersFieldInAdmin("Hamilton");
     }
 
@@ -213,6 +213,11 @@ public class AdminSteps extends ScenarioSteps {
     @Step
     public void checkDeletedProductMessage() {
         Assert.assertTrue(adminPage.checkDeletedProductMessage("product moved to the Trash"));
+    }
+
+    @Step
+    public void checkStockQuantityChange() {
+        adminPage.checkStockQuantityChange();
     }
 
 }

@@ -144,6 +144,9 @@ public class AdminPage extends PageObject {
     @FindBy(id = "post-search-input")
     private WebElementFacade searchOrdersFieldInAdmin;
 
+    @FindBy(css = ".is_in_stock")
+    private WebElementFacade stockField;
+
 
     public void selectDashboardHoverOver() {
         Actions action = new Actions(getDriver());
@@ -299,12 +302,12 @@ public class AdminPage extends PageObject {
         clickOn(ordersButton);
     }
 
-    public void clickOnSearchOrdersFieldInAdmin(String name){
+    public void clickOnSearchOrdersFieldInAdmin(String name) {
         searchOrdersFieldInAdmin.typeAndEnter(name);
     }
 
     public void setAllProductsSearchField(String productName) {
-        typeInto(allProductsSearchField, productName);
+        allProductsSearchField.typeAndEnter(productName);
     }
 
     public void clickOnSearchProductsButton() {
@@ -333,6 +336,20 @@ public class AdminPage extends PageObject {
         waitFor(deletedProductMessage);
         return deletedProductMessage.containsText(message);
     }
+
+    public void checkStockQuantityChange() {
+        String stockNumber = stockField.getText().trim();
+        String stockNumberTrim = stockNumber.replace("In stock (", "").replace(")", "");
+        int stockNumberFin = Integer.valueOf(stockNumberTrim);
+        int generatedStock = 9;
+
+        if ((stockNumberFin == generatedStock)) {
+            System.out.println("it works");
+            clickOn(checkColumnBox);
+        }
+    }
+
+
 }
 
 
